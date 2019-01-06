@@ -23,6 +23,8 @@
 \usepackage{subfigure}
 \usepackage[english]{babel}
 \usepackage{blindtext}
+\usepackage{graphicx}
+\usepackage{caption}
 
 
 \begin{document}
@@ -51,14 +53,24 @@ Static analysis tools (SAT) has been become popular recently. The BCS SIGIST def
 
 \section{Foundations}
 \label{sec:sec_approaches}
-Before we dive in to approaches, we take look over some criterion of SATs introduced by Chess and West \cite{Chess:2007:SPS:1406221}:
+
+In this section we define some basic concepts and definitions that we will reference to them in the rest of paper. 
+
+\subsection{Success Criteria for SATs}
+\label{sec:subsec_successc}
+
+Before we dive in to approaches, we take look over some criteria that a good SAT should meet and they introduced by Chess and West \cite{Chess:2007:SPS:1406221}:
 
 \begin{itemize}
 	\item \textbf{C1 - Quality of the analysis} which indicated the precision of a given tool. Like the language feature coverage, or rate of false negative/positive.
 	\item \textbf{C2 - Trade-off between precision and scalability} Like tradeoff between analysis duration and unwanted results, or memory usage vs depth of data flow to capture. 
-	\item \textbf{C3 - Vulnerability types coverage} How many vulnerabilities is the tool aware of. 
+	\item \textbf{C3 - Vulnerability types coverage} Different types of vulnerabilities is the tool aware of. 
 	\item \textbf{C4 - Usability of the tool} How easy the tool can be used.
 \end{itemize}
+
+Chess and West introduced these criteria for Static Analysis Security testing tools, so we can generalize the C3 to \textit{"Issue types coverage"}. Except C4, other criteria should be considered in the design of a benchmark. 
+
+\subsection{Benchmarking approaches}
 
 We mentioned that the input of a SAT is the source code, and correspondingly the benchmarking approaches are categorized based on the input. Johns and Jodeit define 3 different benchmarking approaches \cite{Scanstud}: 
 
@@ -69,6 +81,9 @@ We mentioned that the input of a SAT is the source code, and correspondingly the
 	
 	\item \textbf{Micro benchmarking suites} contains test suits which each contains one or more issues. The test suits might not even be executable. The approach allows us to easily indicates C1. Also by defining test cases having C3 is not a problem. One of the shortages of this type of benchmarking is how to declare C2, because the size of the tests are way smaller than a real project. 
 \end{itemize}
+
+\subsection{Characteristics of a good benchmark approach}
+\label{sec:good_benchmark}
 
 In order to compare the upcoming systematic benchmark studies we tried to find a list of characteristics. These characteristics is well defined by Johns and Jodeit which are vital for any systematic benchmark approach \cite{Scanstud}:
 
@@ -82,19 +97,17 @@ In order to compare the upcoming systematic benchmark studies we tried to find a
 \label{sec:sec_scanstud}
 The paper propose a micro benchmarking approach for systematic, fine-grained evaluation of Security Static Analysis Tools. They have provide a system in which test could be defined, run automatically and repeatedly and evaluate the results. 
 
-In the rest of this section we look over some of the challenges they have and how they overcome them. The man challenge is how to map the tools findings with created vulnerabilities in tests. Using line number to address the issues is not enough, because different tools propose different line numbers for a certain issue. They have overcome this issue by hosting each \textit{testcode} on a dedicated application. The application only contains a single test case, maybe a real issue or a false positive. They differntiane the testcode and \textit{host program}. \textit{Host program} is the test case added by some other codes to make it parse-able, compile-able and execute-able. 
+In the rest of this section we look over some of the challenges they have and how they overcome them. The man challenge is how to map the tools findings with mined vulnerabilities in tests. Using line number to address the issues is not enough, because different tools propose different line numbers for a certain issue. They have overcome this issue by hosting each \textit{testcode} on a dedicated application. The application only contains a single test case, maybe a real issue or a false positive. They differentiate the \textit{testcode} and \textit{host program}. Host program is the testcode added by some other codes to make it parse-able, compile-able and execute-able. In their test design they have defined to terms, \textit{test} and \textit{testcase}. The testcase is the smallest unit, it is designed to capture only one issue, or to be one false positive. It is passed if the issue found by the tool, or if it is ignored in case of being a false positive. On the other hand, a test contains one or more testcases, and it is passed if all the testcases passed. A test could be used to verify that if a tool can capture a series of issue semantically related. A test could be used to double check a capability of a tool, by defining a vulnerable testcase and a false positive testcase. This way if the test passed, it shows that the tool is working perfectly in finding the issue. The ability to define different testcases and test enables ones to check C1 and C3 criteria mentioned in \ref{sec:subsec_successc} which supports CH1.
 
 The host program might produce some false positives. To address this issue they create 2 version of host program, one with testcode and the other without testcode and they run the preprocessing step on both of them. The results that occur in both of the processes are the false positivies caused by host program and will be removed from result report. 
 
-In order to automatically creating the testcodes, they have a list of template issues saved in files, for example opening a socket. Then there is an script that could insert each template in code, and automatically create different version of testcodes.
+In order to automatically creating the tests, they have a list of template issues saved in files, for example opening a socket. Then there is an script that could insert each template in code, and automatically create different version of tests. Moreover, they have created scripts for automatic tool execution, result diffing, and result evaluation. This greatly supports CH3.
 
-Scanstud also provides a way to manually verify the issue. This is normally done by running the host program which is a complete application to run. 
-
-
+Scanstud also provides a way to manually verify the issue. This is normally done by running the host program which is a complete application to run. This also supports CH2.
 
 \section{Delta-Bench}
 \label{sec:sec_delta}
-The aim of this study is to address the limitations of existing Static Analysis Security Testing tool benchmarks such as lack of vulnerability realism, uncertain ground truth, and large amount of findings not related to analyzed vulnerability\cite{8170097}. The paper provides a \textit{synthetic benchmark} in order to mitigate the current problem of other bench-marking approaches, like bug injection and historical vulnerabilities. The first one is not easy to verify \cite{Dahse:2014:SDS:2671225.2671288} and the historical approach only declares a subset of the \textit{ground truth}. On the other hand in a synthetic benchmark atomic tests could be defined which is specifically related to just one vulnerability or a false positive. Thus bugs, or false positives could be clearly verified and unlike the historical approach it is easy to extend the system. The paper tries to investigate how synthetic benchmark scales in real software projects. 
+The aim of this study is to address the limitations of existing Static Analysis Security Testing tool benchmarks such as lack of vulnerability realism, uncertain ground truth, and large amount of findings not related to analyzed vulnerability\cite{8170097}. The paper provides a \textit{synthetic benchmark} (Micro benchmarking) in order to mitigate the current problem of other bench-marking approaches, like bug injection and historical vulnerabilities. The first one is not easy to verify \cite{Dahse:2014:SDS:2671225.2671288} and the historical approach only declares a subset of the \textit{ground truth}. On the other hand in a synthetic benchmark atomic tests could be defined which is specifically related to just one vulnerability or a false positive - Supports CH1-. Thus bugs, or false positives could be clearly verified and unlike the historical approach it is easy to extend the system. The paper tries to investigate how synthetic benchmark scales in real software projects. 
 
 One of the main problems of using a big software project for bench-marking is the amount of unrelated alamars produced which is not related to vulnerability that one would like to benchmark, which is known as \textit{Background Noise}. The paper addresses the issue by mixing the historical and synthetic approach. They used big well documented software projects and extracted the ground truth from their source code repository. The ground truth is what they expect a tool could find.
 
@@ -116,9 +129,29 @@ The main 5 steps of approach:
 
 The paper tries to evaluate different Java API-misuse detectors, static, dynamic and hybrid detectors. and therefore developed a MuBenchPipe \cite{8338426} the first automated pipeline to benchmark API-misuse detectors. They have a data set called MuBench, which contains 90 Java API misuses, 73 investigated from real world projects, and 17 from a conducted survey. They have set up different experiments in order to evaluate different aspects of the tools. 
 
-MuBenchPipe automates many parts of the experiments and provides a command line interface to control them, such as retrieval and compilation of target projects, running detectors, and collecting their findings. There is a review website that reviewers can see all the findings. Some of them are labeled as potential and MuBenchPipe will not compute the experiment statistics unless they receive a review by at least 2 reviewers. 
+MuBenchPipe automates many parts of the experiments -Supports CH3- and provides a command line interface to control them, such as retrieval and compilation of target projects, running detectors, and collecting their findings. There is a review website that reviewers can see all the findings. Some of them are labeled as potential and MuBenchPipe will not compute the experiment statistics unless they receive a review by at least 2 reviewers. 
 
 With regard to reproduction of experiments, there is a Docker image for both MuBenchPipe and the review website which make it easier to run experiments on different platforms. The review website allows independent reviews, while reviewers working on different workstations, and ensures the integrity using authentication. It is easy to extend MuBenchPipe facilitates the extension in 2 ways. First it has a simple data schema for misuse examples and new plugins (for detection or evaluation) could be added via a clear java interface with Maven. 
+
+\section{Comparison}
+
+
+\begin{table}[]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			& CH1: Testing tool capabilities individually & CH2: Easy, correct,  and iterative testcase creation & CH3: Automatic test execution and result evaluation \\ \hline
+			Scanstud & Possible & Possible & Possible \\ \hline
+			Delta-Bench & Possible & No information & No information  \\ \hline
+			MuBenchPipe & Possible & No information & Possible \\ \hline
+		\end{tabular}%
+	}
+	\caption{My caption}
+	\label{my-label}
+\end{table}
+
 
 \section{Conclusion}
 
