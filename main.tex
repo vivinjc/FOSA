@@ -44,12 +44,16 @@
 
 
 \begin{abstract}
-	Benchmarks have been used in computer science to compare the performance of computer systems. Static Analysis Tools (SAT) has been become popular recently, and whenever a new tool is developed, it comes with a benchmark to show how the tool performs in comparison to other options. However, there is not unified and unique approach for evaluating these tools. In this paper we looked over some approaches on how to systematically build a benchmark for Static analysis tools. We explained different benchmarking approaches and what are the characteristics of a good benchmarking approach. At end, we summarize the paper with pointing to differences and similarities of these approaches.
+	Benchmarks have been used in computer science to compare the performance of computer systems. They provide an experimental basis for evaluating software engineering processes or techniques in an objective and repeatable manner. Static Analysis Tools (SAT) has been become popular recently, and whenever a new tool is developed, it comes with a benchmark to show how the tool performs in comparison to other options. However, there is not unified and unique approach for evaluating these tools. In this paper we looked over some approaches on how to systematically build a benchmark for Static analysis tools. We explained different benchmarking approaches and what are the characteristics of a good benchmarking approach. At end, we summarize the paper with pointing to differences and similarities of these approaches.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:introduction}
-Static analysis tools (SAT) has been become popular recently. The British Computer Society defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifact builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. In this paper we provide a list of recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons and differences. In the rest of this paper, in Section \ref{sec:sec_approaches} we provide the foundation for benchmarking criteria and what are the characteristics of a good SAT and a benchmark.Next we study \textbf{Scanstud: A Methodology for Systematic, Fine-grained Evaluation of Static Analysis Tools} \cite{Scanstud}, then we study \textbf{Delta-Bench: Differential Benchmark for Static Analysis Security Testing Tools} \cite{8170097}. Next we see how MuBenchPipe works which studies \textbf{A Systematic Evaluation of Static API-Misuse Detectors} \cite{8338426}. Then in Section ~\ref{sec:sec_hermes} we see how talk about \textbf{Hermes: Assessment and Creation of Effective Test Corpora} \cite{Reif:2017:HAC:3088515.3088523}. Afterward in Section ~\ref{sec:sec_differential_benchmark}\textbf{FOSS Version Differentiation as a Benchmark for Static Analysis Security Testing Tools} \cite{Pashchenko:2017:FVD:3106237.3121276}.
+Static analysis tools (SAT) has been become popular recently. The British Computer Society defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifact builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. 
+
+Benchmarks provide an experimental basis for evaluating software engineering theories, represented by software engineering techniques, in an objective and repeatable manner \cite{675631}. Based on IEEE definition benchmark defined as “a procedure, problem, or test that can be used to compare systems or components to each other or to a standard” \cite{IEEE1990}. A benchmark represents a problem and possible solutions to it, by defining the the motivating comparison, a task sample and evaluation measures \cite{sim2003}.  The task sample can contain programs, tests, and other artifacts dependent on the benchmark’s motivating comparison. A benchmark controls the task sample reducing result variability, increasing repeatability, and providing a basis for comparison \cite{sim2003}.
+
+In this paper we provide a list of recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons and differences. In the rest of this paper, in Section \ref{sec:sec_approaches} we provide the foundation for benchmarking criteria and what are the characteristics of a good SAT and a benchmark.Next we study \textbf{Scanstud: A Methodology for Systematic, Fine-grained Evaluation of Static Analysis Tools} \cite{Scanstud}, then we study \textbf{Delta-Bench: Differential Benchmark for Static Analysis Security Testing Tools} \cite{8170097}. Next we see how MuBenchPipe works which studies \textbf{A Systematic Evaluation of Static API-Misuse Detectors} \cite{8338426}. Then in Section ~\ref{sec:sec_hermes} we see how talk about \textbf{Hermes: Assessment and Creation of Effective Test Corpora} \cite{Reif:2017:HAC:3088515.3088523}. Afterward in Section ~\ref{sec:sec_differential_benchmark}\textbf{FOSS Version Differentiation as a Benchmark for Static Analysis Security Testing Tools} \cite{Pashchenko:2017:FVD:3106237.3121276}.
 
 \section{Foundations}
 \label{sec:sec_approaches}
@@ -141,6 +145,9 @@ It provides a command line interface to control every part, such as retrieval an
 
 With regard to reproduction of experiments, there is a Docker image for both MuBenchPipe and the review website which make it easier to run experiments on different platforms. The review website allows independent reviews, while reviewers working on different workstations, and ensures the integrity using authentication. It is easy to extend MuBenchPipe facilitates the extension in 2 ways. First it has a simple data schema for misuse examples and new plugins (for detection or evaluation) could be added via a clear java interface with Maven. 
 
+\section{FAULTBENCH}
+\label{sec:sec_faultbench}
+
 \section{Hermes}
 \label{sec:sec_hermes}
 The Hermes\cite{Reif:2017:HAC:3088515.3088523} is a tool, that can analyze collection of java projects and return a optimal set, which covers all requirements, whilst omitting the repetition. In Qualitas Corpus\cite{5693210} \cite{Dingsoyr:2013:RCL:2507288.2507322} collection considered from which Hermes tries to extract the most suitable subset, as per the requirement. However collections like Qualitas Corpus and others can be outdated or built for other purposes, or may have features that are no longer relevant. A subset is composed by taking projects from various collections, across domains which would be developed by various people. Therefore, these projects vary in style, size and methodology. Hence understanding the properties within each of the project that comprises the subset is difficult. Without this understanding it is not possible to establish conclusive results. Hermes helps to overcome these issues with a two step approach, that is:
@@ -209,14 +216,14 @@ Synthetic test suite typically contains only flaw within a testcase. Differentia
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
 		& CH1: Testing tool capabilities individually & CH2: Easy, correct,  and iterative testcase creation & CH3: Automatic test execution and result evaluation & CH4: Representativeness \\ \hline
-		Scanstud & Possible & Possible & Possible & ? \\ \hline
-		Delta-Bench & Possible & No information & No information & ?  \\ \hline
-		MuBenchPipe & Possible & No information & Possible & ? \\ \hline
+		Scanstud & Possible & Possible & Possible &  Depends on selected testcases\\ \hline
+		Delta-Bench & Possible & No information & No information &  No information \\ \hline
+		MuBenchPipe & Possible & No information & Possible & Depends on selected testcases \\ \hline
 		Hermes & Possible & No information & Possible & ?  \\ \hline
 		Differential Benchmark & Possible & No information & No information & ?  \\ \hline
 	\end{tabular}%
 }
-\caption{My caption}
+\caption{Which characteristics each of the approaches has}
 \label{my-label}
 \end{table*}
 
