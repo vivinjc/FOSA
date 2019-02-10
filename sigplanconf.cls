@@ -442,39 +442,39 @@
 \if \@ninepoint
 
 \renewcommand{\normalsize}{%
-  \@setfontsize{\normalsize}{9pt}{10pt}%
+  \@setfontsize{\normalsize}{11pt}{12pt}%
   \setlength{\abovedisplayskip}{5pt plus 1pt minus .5pt}%
   \setlength{\belowdisplayskip}{\abovedisplayskip}%
   \setlength{\abovedisplayshortskip}{3pt plus 1pt minus 2pt}%
   \setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
 
-\renewcommand{\tiny}{\@setfontsize{\tiny}{5pt}{6pt}}
+\renewcommand{\tiny}{\@setfontsize{\tiny}{7pt}{8pt}}
 
-\renewcommand{\scriptsize}{\@setfontsize{\scriptsize}{7pt}{8pt}}
+\renewcommand{\scriptsize}{\@setfontsize{\scriptsize}{9pt}{10pt}}
 
 \renewcommand{\small}{%
-  \@setfontsize{\small}{8pt}{9pt}%
+  \@setfontsize{\small}{10pt}{11pt}%
   \setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}%
   \setlength{\belowdisplayskip}{\abovedisplayskip}%
   \setlength{\abovedisplayshortskip}{2pt plus 1pt}%
   \setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
 
 \renewcommand{\footnotesize}{%
-  \@setfontsize{\footnotesize}{8pt}{9pt}%
+  \@setfontsize{\footnotesize}{10pt}{11pt}%
   \setlength{\abovedisplayskip}{4pt plus 1pt minus .5pt}%
   \setlength{\belowdisplayskip}{\abovedisplayskip}%
   \setlength{\abovedisplayshortskip}{2pt plus 1pt}%
   \setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
 
-\renewcommand{\large}{\@setfontsize{\large}{11pt}{13pt}}
+\renewcommand{\large}{\@setfontsize{\large}{13pt}{15pt}}
 
-\renewcommand{\Large}{\@setfontsize{\Large}{14pt}{18pt}}
+\renewcommand{\Large}{\@setfontsize{\Large}{16pt}{20pt}}
 
-\renewcommand{\LARGE}{\@setfontsize{\LARGE}{18pt}{20pt}}
+\renewcommand{\LARGE}{\@setfontsize{\LARGE}{20pt}{22pt}}
 
-\renewcommand{\huge}{\@setfontsize{\huge}{20pt}{25pt}}
+\renewcommand{\huge}{\@setfontsize{\huge}{22pt}{27pt}}
 
-\renewcommand{\Huge}{\@setfontsize{\Huge}{25pt}{30pt}}
+\renewcommand{\Huge}{\@setfontsize{\Huge}{27pt}{32pt}}
 
 \else\if \@tenpoint
 

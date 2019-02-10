@@ -1,0 +1,23 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+The style file: abbrvnat.bst
+Database file #1: references.bib
+I was expecting a `,' or a `}'---line 69 of file references.bib
+ :  
+ :  author={Specialist Interest Group in Software Testing (BCS SIGIST)},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "owasp" isn't style-file defined
+--line 84 of file references.bib
+Warning--I'm ignoring Wilander250309's extra "institution" field
+--line 217 of file references.bib
+Warning--to sort, need author or key in Glossary_of_term
+Warning--to sort, need author or key in owasp
+Warning--empty author in Glossary_of_term
+Warning--empty title in Glossary_of_term
+Warning--empty journal in Glossary_of_term
+Warning--empty year in Glossary_of_term
+Warning--empty year in Glossary_of_term
+Warning--empty year in owasp
+Warning--empty booktitle in Kupsch2009ManualVA
+Warning--empty year in Livshits_defininga
+(There was 1 error message)

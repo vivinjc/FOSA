@@ -1,4 +1,4 @@
-%-----------------------------------------------------------------------------
+ %-----------------------------------------------------------------------------
 % Template for seminar 'Program Analysis' at TU Darmstadt.
 %
 % Adapted from template for sigplanconf LaTeX Class, which is a LaTeX 2e
@@ -23,30 +23,28 @@
 \usepackage{subfigure}
 \usepackage[english]{babel}
 \usepackage{blindtext}
+\usepackage{float} 
 \usepackage{graphicx}
 \usepackage{caption}
-\usepackage{float}
-
-
 
 \begin{document}
+	
+	\special{papersize=a4}
+	\setlength{\pdfpageheight}{\paperheight}
+	\setlength{\pdfpagewidth}{\paperwidth}
+	
+	
+	\title{A survey on systematic construction of benchmarks for Static Analysis tools}
+	\subtitle{Supervisor: Michael Eichberg \\ eichberg@cs.tu-darmstadt.de}
+	
+	
+	\authorinfo{Kasra Qasempour Soleimany}{ TU DARMSTADT}{k.qasempour@gmail.com}
+	\authorinfo{Vivin Joseph Christoph}{TU DARMSTADT}{vivinjc@gmail.com}	
+	\maketitle
 
-\special{papersize=a4}
-\setlength{\pdfpageheight}{\paperheight}
-\setlength{\pdfpagewidth}{\paperwidth}
-
-
-\title{A survey on systematic construction of benchmarks for Static Analysis tools}
-
-\authorinfo{Kasra Qasempour Soleimany 
-}{Matriculation number: 2777218	}{k.qasempour@gmail.com}
-\authorinfo{Vivin Joseph Christoph
-}{vivinjc@gmail.com}
-
-\maketitle
 
 \begin{abstract}
-Automatic construction of benchmark for static analysis security testing (SAST). SAST tools can generate false alarms. Therefore, it is necessary to have tools that work on experience and theory rather than theory alone. This is accomplished by finding the difference between the vulnerable (version with bugs) and fixed. And availability of such tools are scarce. New analysis is developed with the focus on implementation and its effectiveness in the actual use-case scenarios. To build a new analysis, custom and well-established collection of java projects can be used as template. Then, key is to find features that are the focus of the analysis within the selected project set. Also, segregation and removal of repeated or identical features manually is a daunting task. Therefore it is necessary to automate it. For which the benchmarking tool/tools much be equipped.
+	Automatic construction of benchmark for static analysis security testing (SAST). SAST tools can generate false alarms. Therefore, it is necessary to have tools that work on experience and theory rather than theory alone. This is accomplished by finding the difference between the vulnerable (version with bugs) and fixed. And availability of such tools are scarce. New analysis is developed with the focus on implementation and its effectiveness in the actual use-case scenarios. To build a new analysis, custom and well-established collection of java projects can be used as template. Then, key is to find features that are the focus of the analysis within the selected project set. Also, segregation and removal of repeated or identical features manually is a daunting task. Therefore it is necessary to automate it. For which the benchmarking tool/tools much be equipped.
 \end{abstract}
 
 \section{Introduction}
@@ -124,8 +122,8 @@ The main 5 steps of approach:
 	\item Signals are the alerts differing between the tool outputs on C\textsubscript{vuln} and C\textsubscript{fixed}. To find the \textit{background noise} they use the line number of reported alarms. 
 \end{enumerate}
 
-	Unfortunately there is not any detail about the automation, reproduction and extension of the process. The best advantage of the approach is that it could remove the background noise, but it still has some limitations. First of all, the bug fix commit should only contains the codes reltaed to the fix, and if there be any other unrelated codes like refactoring, could lead to some differences in the alarms. The second limitation is the initial phase where a set of vulnerable, fixed bugs must be found in a real world project, thus it could be just applied to project with well documented source issues and fixes.
-	
+Unfortunately there is not any detail about the automation, reproduction and extension of the process. The best advantage of the approach is that it could remove the background noise, but it still has some limitations. First of all, the bug fix commit should only contains the codes reltaed to the fix, and if there be any other unrelated codes like refactoring, could lead to some differences in the alarms. The second limitation is the initial phase where a set of vulnerable, fixed bugs must be found in a real world project, thus it could be just applied to project with well documented source issues and fixes.
+
 \section{MuBenchPipe}
 \label{sec:sec_mubenchpipe}
 
@@ -143,7 +141,7 @@ The Hermes\cite{Reif:2017:HAC:3088515.3088523} is a tool, that can analyze colle
 \begin{enumerate}
 	\item Help to understand the properties within the projects and 
 	\item Help build an optimal collection from the projects which satisfies the requirements.
-	\end{enumerate}
+\end{enumerate}
 
 The queries in Hermes can be extended which enables to further optimize and customize the result set. Hermes is extensible and configurable. However the requirement is that, the collection have to be in java bytecode. The collection can be java programs or libraries. 
 
@@ -162,14 +160,8 @@ Evaluation methodology of Hermes :
 1) Understanding the test collection:
 Hermes when run on Qualitas Corpus from 2013, it was able to conclude: None of the project used java 8 features. None of the projects used java FX framework Only one project used java 7 feature. Hereby summarizing that collection from September 2013 cannot be used to test for latest java features.
 
-
 2) Generating effective integration testing suite:
 Hermes generated the subset from Qualitas Corpus that is optimal( small, yet effective) and covering all scenarios specified. Thus reducing the run time from 16.77 minutes (time required to run on hundred projects that comprises Qualitas Corpus) to 2.82 minutes( time required to run on selected subset). And the code coverage was only 1.09\% less. This could be bettered by adding the missing features in the queries and re-running Hermes. Thus Hermes fulfills its purpose of better understanding the test set and creation of subsets using the derived understanding.
-
-
-
-
-
 
 \section{Differential Benchmark}
 \label{sec:sec_differential_benchmark}
@@ -186,22 +178,20 @@ Generic methodology for a testing tool evalutation:
 	\item Check for correctness in the finding.
 \end{enumerate}
 
-
 This methodology is suitable for custom collection of projects for which, it is generally know where the error in the code are present. But this is not the case in the real world applications as there might be multiple bugs. Bugs are usually fixed one after the other and therefore the resultant set must have difference only the in the corrected area, compared to the earlier version before running the tool on it. 
 
 Proposed methodology of differential benchmarking in FOSS:
 \begin{enumerate}
-		\item Find the changed lines of code by comparing fixed and bugged versions.
-		\item Run the tool on the bugged version
-		\item Run the tool on the fixed version
-		\item Ignore the tool findings that occur in fixed and bugged version as this can be considered as background noise (false alarms)
-		\item Classify the remaining finding
+	\item Find the changed lines of code by comparing fixed and bugged versions.
+	\item Run the tool on the bugged version
+	\item Run the tool on the fixed version
+	\item Ignore the tool findings that occur in fixed and bugged version as this can be considered as background noise (false alarms)
+	\item Classify the remaining finding
 \end{enumerate}
 
 Here only one bug is fixed at a given time, therefore any other finding not related to the discovered bug is ignored even if it might be right. This is major disadvantage, as it leads to redundant re runs.
 
 Synthetic test suite typically contains only flaw within a testcase. Differential benchmarks has sufficient complexity to identify false alerts. Current tools require some additional input data whilst differential benchmark needs fixed and bugged version of projects to generate expected correct code. Differential benchmark is independent of programing languages and bug types. Auto classification of true positive, false negative, false positive, and true negative is also possible. 
-
 
 \section{Comparison}
 \begin{table}[H]
@@ -222,13 +212,13 @@ Synthetic test suite typically contains only flaw within a testcase. Differentia
 	}
 	\caption{My caption}
 	\label{my-label}
-	\end{table}
+\end{table}
+
 
 
 \section{Conclusion}
-
-
-\bibliographystyle{abbrvnat}
-\bibliography{references}
-
-\end{document}
+		
+	\bibliographystyle{abbrvnat}
+	\bibliography{references}
+	
+	\end{document}
