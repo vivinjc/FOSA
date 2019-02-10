@@ -44,12 +44,12 @@
 
 
 \begin{abstract}
-	Automatic construction of benchmark for static analysis security testing (SAST). SAST tools can generate false alarms. Therefore, it is necessary to have tools that work on experience and theory rather than theory alone. This is accomplished by finding the difference between the vulnerable (version with bugs) and fixed. And availability of such tools are scarce. New analysis is developed with the focus on implementation and its effectiveness in the actual use-case scenarios. To build a new analysis, custom and well-established collection of java projects can be used as template. Then, key is to find features that are the focus of the analysis within the selected project set. Also, segregation and removal of repeated or identical features manually is a daunting task. Therefore it is necessary to automate it. For which the benchmarking tool/tools much be equipped.
+	Benchmarks have been used in computer science to compare the performance of computer systems. Static Analysis Tools (SAT) has been become popular recently, and whenever a new tool is developed, it comes with a benchmark to show how the tool performs in comparison to other options. However, there is not unified and unique approach for evaluating these tools. In this paper we looked over some approaches on how to systematically build a benchmark for Static analysis tools. We explained different benchmarking approaches and what are the characteristics of a good benchmarking approach. At end, we summarize the paper with pointing to differences and similarities of these approaches.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:introduction}
-Static analysis tools (SAT) has been become popular recently. The BCS SIGIST defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifact builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. In this paper we provide a list of recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons and differences. we study these papers ... 
+Static analysis tools (SAT) has been become popular recently. The British Computer Society defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifact builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. In this paper we provide a list of recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons and differences. we study these papers ... 
 
 \section{Foundations}
 \label{sec:sec_approaches}
@@ -127,12 +127,18 @@ Unfortunately there is not any detail about the automation, reproduction and ext
 \section{MuBenchPipe}
 \label{sec:sec_mubenchpipe}
 
-The paper tries to evaluate different Java API-misuse detectors, static, dynamic and hybrid detectors. and therefore developed a MuBenchPipe \cite{8338426} the first automated pipeline to benchmark API-misuse detectors. They have a data set called MuBench, which contains 90 Java API misuses, 73 investigated from real world projects, and 17 from a conducted survey. They have set up different experiments in order to evaluate different aspects of the tools. 
+The paper tries to evaluate different Java API-misuse detectors, static, dynamic and hybrid detectors. and therefore developed a MuBenchPipe \cite{8338426} the first automated pipeline to benchmark API-misuse detectors. They have a data set called MuBench, which contains 90 Java API misuses, 73 investigated from real world projects, and 17 from a conducted survey. They
+selected 4 tools and they have tried
+
+ have set up different experiments in order to evaluate different aspects of the tools
+
+\begin{itemize}
+	\item \textbf{Experiment P} is designed to evaluate the precision of tools. The motivation behind the expriment is that developers tend to not use tools that produces too many false alarms. 
+\end{itemize}
 
 MuBenchPipe automates many parts of the experiments -Supports CH3- and provides a command line interface to control them, such as retrieval and compilation of target projects, running detectors, and collecting their findings. There is a review website that reviewers can see all the findings. Some of them are labeled as potential and MuBenchPipe will not compute the experiment statistics unless they receive a review by at least 2 reviewers. 
 
 With regard to reproduction of experiments, there is a Docker image for both MuBenchPipe and the review website which make it easier to run experiments on different platforms. The review website allows independent reviews, while reviewers working on different workstations, and ensures the integrity using authentication. It is easy to extend MuBenchPipe facilitates the extension in 2 ways. First it has a simple data schema for misuse examples and new plugins (for detection or evaluation) could be added via a clear java interface with Maven. 
-
 
 \section{Hermes}
 \label{sec:sec_hermes}
