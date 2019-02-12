@@ -95,6 +95,7 @@ In order to compare the upcoming systematic benchmark studies we tried to find a
 	\item \textbf{CH1 - Testing tool capabilities individually} a systematic benchmark should be able to test each capability of the tool individually. 
 	\item \textbf{CH2 - Easy, correct, and iterative testcase creation} The system should be able to create easy, correct and iterative testcases. Testcases should be short and human readable and the system should allow the manual verification of a certain issue among defined tests. 
 	\item \textbf{CH3 - Automatic test execution and result evaluation} The test-code development is not a one-time perfect task. The test cases might not be perfect intially and the test designers will iteratively improve them to fit their needs. Therefore ease the creations and also the benchmark process, the system should be able to automatically and repeatedly run tests and evaluate the results. 
+	\item \textbf{CH4 - Representativeness of a tool} This can be defined as how well or accurately can the tool cover the requirement specified and also how accurately can the tool find the requirement within a test corpora. Its is important to note, that lesser representative a tool is, it equally increases the complexity and effort required within an evaluation.
 \end{itemize}
 
 Beside these 3 characteristics, we point to more 7 properties for a successful benchmark, \cite{lu2005bugbench}, \cite{sim2003}:
@@ -102,7 +103,7 @@ Beside these 3 characteristics, we point to more 7 properties for a successful b
  \begin{itemize}
 	\item \textbf{Accessibility} A benchmark should be easy to obtain and use. For example the  source under test should be open-source and available online. 
 	\item \textbf{Clarity} A benchmark’s documentation should be clear and concise, in order to adopt easy and extend it.
-	\item \textbf{Relevance/Representative} The selected targets (inputs to SATs) most cover all the issues in the benchmarking subject area  and performance measures must covers all the properties of benchmarking target. 
+	\item \textbf{Relevance/Representative} The selected targets (inputs to SATs) must cover all the issues in the benchmarking subject area  and performance measures must covers all the properties of benchmarking target. 
 	\item \textbf{Solvability} Completing the task sample and obtaining correct metrics should be possible. 
 	\item \textbf{Portability} A benchmark should be usable by different techniques without bias. 
 	\item \textbf{Scalability} It should be scalable to any technique. Adding new techniques and adding other targets should be possible. 
@@ -159,20 +160,20 @@ With regard to reproduction of experiments, there is a Docker image for both MuB
 
 \section{Hermes}
 \label{sec:sec_hermes}
-The Hermes\cite{Reif:2017:HAC:3088515.3088523} is a tool, that can analyze collection of java projects and return a optimal set, which covers all requirements, whilst omitting the repetition. In Qualitas Corpus\cite{5693210} \cite{Dingsoyr:2013:RCL:2507288.2507322} collection considered from which Hermes tries to extract the most suitable subset, as per the requirement. However collections like Qualitas Corpus and others can be outdated or built for other purposes, or may have features that are no longer relevant. A subset is composed by taking projects from various collections, across domains which would be developed by various people. Therefore, these projects vary in style, size and methodology. Hence understanding the properties within each of the project that comprises the subset is difficult. Without this understanding it is not possible to establish conclusive results. Hermes helps to overcome these issues with a two step approach, that is:
+The Hermes\cite{Reif:2017:HAC:3088515.3088523} is a tool, that can analyze collection of java projects and return a optimal set, which covers all requirements, whilst omitting the repetition.This is one of the prime feature of a benechmarking suite,which would satisfy the defined success criteria C1,C2 and C3.Also the characteristics CH1,and CH4 would be addressed.In the Qualitas Corpus\cite{5693210} \cite{Dingsoyr:2013:RCL:2507288.2507322} collection considered, from which Hermes tries to extract the most suitable subset, as per the requirement. However collections like Qualitas Corpus and others can be outdated or built for other purposes, or may have features that are no longer relevant. A subset is composed by taking projects from various collections, across domains which would be developed by various people, thus covering an entirety of the specification as mentioned in characteristic CH4.  Therefore, these projects vary in style, size and methodology. Hence understanding the properties within each of the project that comprises the subset is difficult. Without this understanding it is not possible to establish conclusive results. Hermes helps to overcome these issues with a two step approach, that is:
 
 \begin{enumerate}
 	\item Help to understand the properties within the projects and 
 	\item Help build an optimal collection from the projects which satisfies the requirements.
 \end{enumerate}
 
-The queries in Hermes can be extended which enables to further optimize and customize the result set. Hermes is extensible and configurable. However the requirement is that, the collection have to be in java bytecode. The collection can be java programs or libraries. 
+The queries in Hermes can be extended which enables to further optimize and customize the result set. Hermes is extensible and configurable. However the requirement is that, the collection have to be in java bytecode. The collection can be java programs or libraries. Here the extensibility offered by Hermes is noteworthy. As we mentioned, a good benchmarking tool must have a justifiable, tradeoff between precision and scalability as mentioned in success criteria C2. 
 
-Hermes works by searching across the projects looking for the specified feature. Then it collects and sorts the projects that have those specific feature atleast once. Hermes is built on OPAL, opal can compute and control flow graphs, call graphs, support low level queries, high abstraction, within scala choco (constraint programming library) is used for selecting optimal collection.
+Hermes works by searching across the projects looking for the specified feature. Then it collects and sorts the projects that have those specific feature atleast once. Hermes is built on OPAL, opal can compute and control flow graphs, call graphs, support low level queries, high abstraction, here scala choco (constraint programming library) is used for selecting optimal collection. Since the tool searches through the collection of libraries to find specified feature it not only helps better understanding of the project set, but also makes sure that the project with the specified feature is chosen fromt the whole collection.
 
-Hermes Configuration : every selected project has id, classpath and attributes(optional). Queries specified by default are executed. However, their execution can be decided as per the requirements, with possibility to add newer queries. Once queries are executed , Hermes shows if the project contains the feature or not, if the project contains the feature, then the navigation to that particular code portion within the project is enabled. Also these details can be managed enabling easier management of larger collections of projects like Qualitas Corpus. Feature query is a static analysis run on a project which outputs presence of the specified feature or closely related feature. Eg : having only java7 class files. Every feature query has Id of the respective feature and query. Once all the queries are executed, Hermes will select the projects with atleast one occurrence of the feature. If two projects have the same feature occurrence then it will pick the project with lesser number of methods (smaller project). The results can be exported to the external file and post processing can be done.
+Hermes Configuration : every selected project has id, classpath and attributes(optional). Queries specified by default are executed. However, their execution can be decided as per the requirements, with possibility to add newer queries. Once queries are executed , Hermes shows if the project contains the feature or not, if the project contains the feature, then the navigation to that particular code portion within the project is enabled. Also these details can be managed enabling easier management of larger collections of projects like Qualitas Corpus. Feature query is a static analysis run on a project which outputs presence of the specified feature or closely related feature. Eg : having only java7 class files. Every feature query has Id of the respective feature and query. Once all the queries are executed, Hermes will select the projects with atleast one occurrence of the feature. If two projects have the same feature occurrence then it will pick the project with lesser number of methods (smaller project). This is niche feature as it tries to keep the overall size of the collection to bare minimum, whilst coveriing the requirement.This is user friendly feature as it helps the user effort to be minimum and hence we can say the criteria C4 is clearly satisfied by the tool. Apart from this the results can be exported to the external file and post processing can be done. This can be a useful feature for academic and scientific purposes.
 
-Blackburn’s DaCapo benchmark suite\cite{Blackburn:2006:DBJ:1167473.1167488} is about developing java performance evaluation using static and dynamic software metrics. And, how to develop the collection for the evaluation. Tempero et al’s Qualitas Corpus is about empirical study of code based on size, content, representativeness and permanence. Livshits et al’s SecuriBench\cite{Livshits_defininga} is about static and dynamic security analysis. All these collections are topic specific and are not updated regularly and that is an issue. Dujmovic presented parameterized approach to generate fully synthetic programs that allow benchmarking and testing. But this approach is not applicable to the real world application. Dujmovic et al’s automatic benchmark management\cite{Dujmovic:2010:AGB:1712605.1712654} can extract and update a collection, but it cannot find the differences between the projects.
+Some more tool set which analysed were meeting some of the criteria for a successful benchmarking tool. Like, Blackburn’s DaCapo benchmark suite\cite{Blackburn:2006:DBJ:1167473.1167488} is about developing java performance evaluation using static and dynamic software metrics. And, how to develop the collection for the evaluation. Tempero et al’s Qualitas Corpus is about empirical study of code based on size, content, representativeness and permanence. Livshits et al’s SecuriBench\cite{Livshits_defininga} is about static and dynamic security analysis. All these collections are topic specific and are not updated regularly and that is an issue. Dujmovic presented parameterized approach to generate fully synthetic programs that allow benchmarking and testing. But this approach is not applicable to the real world application. Dujmovic et al’s automatic benchmark management\cite{Dujmovic:2010:AGB:1712605.1712654} can extract and update a collection, but it cannot find the differences between the projects. It is important to note that, these above mentioned benchmarking tools are not as comprehensive as Hermes. Hermes tries to solve the problem by becoming one stoop solution, within the benchmarking domain where tools are scarce.
 
 \begin{table*}[h]
 	\centering
@@ -184,11 +185,11 @@ Blackburn’s DaCapo benchmark suite\cite{Blackburn:2006:DBJ:1167473.1167488} is
 			Scanstud & Possible & Possible & Possible &  Depends on selected testcases\\ \hline
 			Delta-Bench & Possible & No information & No information &  No information \\ \hline
 			MuBenchPipe & Possible & No information & Possible & Depends on selected testcases \\ \hline
-			Hermes & Possible & No information & Possible & ?  \\ \hline
-			Differential Benchmark & Possible & No information & No information & ?  \\ \hline
+			Hermes & Possible & Possible & Possible & Possible  \\ \hline
+			Differential Benchmark & Possible & Partially Possible & No information & No information  \\ \hline
 		\end{tabular}%
 	}
-	\caption{Which characteristics each of the approaches has}
+	\caption{Characteristics available within each approach}
 	\label{my-label}
 \end{table*}
 
@@ -199,40 +200,57 @@ Evaluation methodology of Hermes :
 \end{enumerate}
 
 1) Understanding the test collection:
-Hermes when run on Qualitas Corpus from 2013, it was able to conclude: None of the project used java 8 features. None of the projects used java FX framework Only one project used java 7 feature. Hereby summarizing that collection from September 2013 cannot be used to test for latest java features.
+Hermes when run on Qualitas Corpus from 2013, it was able to find out, that none of the project used java 8 features. None of the projects used java FX framework Only one project used java 7 feature. Hereby summarizing that collection from September 2013 cannot be used to test for latest java features.Thus we have a clear proof of Hermes satisfying C1,C2, and C3. And characteristics CH1,CH2 AND CH4.
 
 2) Generating effective integration testing suite:
-Hermes generated the subset from Qualitas Corpus that is optimal( small, yet effective) and covering all scenarios specified. Thus reducing the run time from 16.77 minutes (time required to run on hundred projects that comprises Qualitas Corpus) to 2.82 minutes( time required to run on selected subset). And the code coverage was only 1.09\% less. This could be bettered by adding the missing features in the queries and re-running Hermes. Thus Hermes fulfills its purpose of better understanding the test set and creation of subsets using the derived understanding.
+Hermes generated the subset from Qualitas Corpus that is optimal( small, yet effective, means to say it meets the requirement specified) and covering all scenarios mentioned. Whilst creating a optimal subset.Therefore reducing the run time from 16.77 minutes (time required to run on hundred projects that comprises Qualitas Corpus) to 2.82 minutes( time required to run on selected subset). And the code coverage was only 1.09\% less. This could be bettered by adding the missing features in the queries and re-running Hermes. And the size still would remain considerably smaller than original test collection built. Thus Hermes fulfils its purpose of better understanding the test set and automatic creation of subsets using the derived understanding. This fulfils the characteristic CH3.
 
 \section{Differential Benchmark}
 \label{sec:sec_differential_benchmark}
-Both the academic and Industrial surveys do not provide information on the benchmark construction\cite{5954458} \cite{5689543} . Through the project static analysis tool exposition ( run from 2008 to 2016), software assurance reference dataset was created. Bug collections in the following dataset may not represent all vulnerabilities in the real world\cite{greiman2016iccws} \cite{Kupsch2009ManualVA} \cite{Wilander250309}. This is the reasons for false alarms.
+Both the academic and Industrial surveys do not provide substantial information on the benchmark construction\cite{5954458} \cite{5689543} . Through the project static analysis tool exposition that was run from 2008 to 2016, software assurance reference dataset was created. However, it is important to note, bug collections in the following dataset may not represent all vulnerabilities in the real world\cite{greiman2016iccws} \cite{Kupsch2009ManualVA} \cite{Wilander250309}. This is the reasons for false alarms. False alarm is a background noise that is generated, which can cause attention deviation from the original issue. And this a major source of reason in skipping over certain vulnerabilities during testing.
 
-Juliet test suite, suggests benchmarking real-world application is challenging. Dolan gavitt et al \cite{7546498}, suggests method to artificially inject vulnerabilities into source code of real-world application, Large scale automated vulnerability addition (LAVA methodology). However LAVA methodology cannot perform automatic detection and correction of false alarms in real world application. Also this methodology cannot inject some specific vulnerabilities.Cardar and Donaldson \cite{Cadar:2016:APA:2889160.2889206} suggested program transformation like mutation and metamorphic testing to increase code coverage of SAST tools. But this cannot find bugs in the source code of  real world application. Thus the issue with only using SAST tools to analyze real world application is that false alarms for bugs analyzed might be true for bugs that are yet to be analyzed.
+Juliet test suite, suggests benchmarking real-world application is challenging. And the challenge is due to variability within the real world ecosystem. Dolan gavitt et al \cite{7546498}, suggests method to artificially inject vulnerabilities into source code of real-world application, Large scale automated vulnerability addition (LAVA methodology). However LAVA methodology cannot perform automatic detection and correction of false alarms in real world application. Also this methodology cannot inject some specific vulnerabilities. Cardar and Donaldson \cite{Cadar:2016:APA:2889160.2889206} suggested program transformation like mutation and metamorphic testing to increase code coverage of SAST tools. But this cannot find bugs in the source code of  real world application. Thus the issue with only using SAST tools to analyze real world application is that false alarms for bugs analyzed might be true alarams for bugs that are yet to be analyzed.
 
-So free open source society (FOSS) \cite{Pashchenko:2017:FVD:3106237.3121276} vulnerability fixing methodology was developed to overcome these defects. Ground truth is the expected correct output. Nuyen et al \cite{Do:2016:TAB:2931021.2931023} suggest code snippet that produces expected correct output when it had bug and the snippet after it was fixed.
+So, free open source society (FOSS) \cite{Pashchenko:2017:FVD:3106237.3121276} differential vulnerability fixing methodology was developed to overcome these defects. Here empahsis is on ground truth. Ground truth is the expected correct output. Nuyen et al \cite{Do:2016:TAB:2931021.2931023} suggests to consider code snippet that should produce expected correct output when it had bug and the same snippet after the bug is fixed. Therefore here there are two versions that are being compared which forms the core idea of the evaluation described. This would the fullfil the success criteria C1 and C2 as idea is focused on helps in finding different types of vulnerability with good precision.
 
-Generic methodology for a testing tool evalutation: 
+Generic methodology for a testing tool evaluation: 
 \begin{enumerate}
 	\item Run tool on vulnerable version.
 	\item Extract tool finding.
 	\item Check for correctness in the finding.
 \end{enumerate}
 
-This methodology is suitable for custom collection of projects for which, it is generally know where the error in the code are present. But this is not the case in the real world applications as there might be multiple bugs. Bugs are usually fixed one after the other and therefore the resultant set must have difference only the in the corrected area, compared to the earlier version before running the tool on it. 
+This methodology is suitable for custom collection of projects for which, it is generally know where the errors in the code are present. But this is not the case in the real world applications as there might be multiple bugs. Bugs are usually fixed one after the other and therefore the resultant set must have difference only the in the corrected area, compared to the earlier version prior to running the tool on it. 
 
 Proposed methodology of differential benchmarking in FOSS:
 \begin{enumerate}
-	\item Find the changed lines of code by comparing fixed and bugged versions.
-	\item Run the tool on the bugged version
+	\item Find the changed lines of code by comparing fixed and version with bug.
+	\item Run the tool on the version with the bug
 	\item Run the tool on the fixed version
-	\item Ignore the tool findings that occur in fixed and bugged version as this can be considered as background noise (false alarms)
+	\item Ignore the tool findings that occur in fixed and version with the bug that are irrelevant to the current bug in consideration, as this can be considered as background noise (false alarms)
 	\item Classify the remaining finding
 \end{enumerate}
 
-Here only one bug is fixed at a given time, therefore any other finding not related to the discovered bug is ignored even if it might be right. This is major disadvantage, as it leads to redundant reruns.
+Here only one bug is fixed at a given run, therefore any other finding not related to the discovered bug is ignored even if it might be right. This is major disadvantage, as it leads to redundant reruns. Here characteristic CH4 is not satisfied because the tool is not covering the complete bug spectrum, and we have less information to determine the characteristic CH3. However due to the various re-runs conducted features can be tested individually satisfying the CH1 described above.
+\begin{table*}[h]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			& Accessibility  & Clarity  & Relevance  & Solvability & Portability  & Scalability & Fairness \\ \hline
+			Scanstud & Possible & Possible & Possible &  Depends on selected testcases & xyz & xyz & xyz \\ \hline
+			Delta-Bench & Possible & No information & No information &  No information & xyz & xyz & xyz \\ \hline
+			MuBenchPipe & Possible & No information & Possible & Depends on selected testcases & xyz & xyz & xyz \\ \hline
+			Hermes & Possible & Possible & Possible & Possible & Possible & Possible & Possible  \\ \hline
+			Differential Benchmark & Possible & No information & No information & Possible & Not Possible & Partially possible & Possible  \\ \hline
+		\end{tabular}%
+	}
+	\caption{Characteristics available within each approach}
+	\label{my-label}
+\end{table*}
 
-Synthetic test suite typically contains only flaw within a testcase. Differential benchmarks has sufficient complexity to identify false alerts. Current tools require some additional input data whilst differential benchmark needs fixed and bugged version of projects to generate expected correct code. Differential benchmark is independent of programming languages and bug types. Auto classification of true positive, false negative, false positive, and true negative is also possible. 
+Synthetic test suite typically contains only flaw within a testcase. Differential benchmarks has sufficient complexity to identify false alerts. Current tools require some additional input data whilst differential benchmark needs only the fixed and bugged version of projects to generate expected correct code. Differential benchmark is independent of programming languages and bug types. Auto classification of true positive, false negative, false positive, and true negative is also possible. Thus we can say the tool might partially satisfy characteristic CH2, as it cannot be said to be easy due to the re-runs required to arrive at the final conclusion.
 
 \section{Conclusion}
 
