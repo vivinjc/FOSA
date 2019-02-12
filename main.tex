@@ -44,12 +44,16 @@
 
 
 \begin{abstract}
-	Automatic construction of benchmark for static analysis security testing (SAST). SAST tools can generate false alarms. Therefore, it is necessary to have tools that work on experience and theory rather than theory alone. This is accomplished by finding the difference between the vulnerable (version with bugs) and fixed. And availability of such tools are scarce. New analysis is developed with the focus on implementation and its effectiveness in the actual use-case scenarios. To build a new analysis, custom and well-established collection of java projects can be used as template. Then, key is to find features that are the focus of the analysis within the selected project set. Also, segregation and removal of repeated or identical features manually is a daunting task. Therefore it is necessary to automate it. For which the benchmarking tool/tools much be equipped.
+	Benchmarks have been used in computer science to compare the performance of computer systems. They provide an experimental basis for evaluating software engineering processes or techniques in an objective and repeatable manner. Static Analysis Tools (SAT) has been become popular recently, and whenever a new tool is developed, it comes with a benchmark to show how the tool performs in comparison to other options. However, there is not unified and unique approach for evaluating these tools. In this paper we looked over some approaches on how to systematically build a benchmark for Static analysis tools. We explained different benchmarking approaches and what are the characteristics of a good benchmarking approach. At end, we summarize the paper with pointing to differences and similarities of these approaches.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:introduction}
-Static analysis tools (SAT) has been become popular recently. The BCS SIGIST defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifact builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. In this paper we provide a list of recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons and differences. we study these papers ... 
+Static analysis tools (SAT) has been become popular recently. The British Computer Society defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifact builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. 
+
+Benchmarks provide an experimental basis for evaluating software engineering theories, represented by software engineering techniques, in an objective and repeatable manner \cite{675631}. Based on IEEE definition benchmark defined as “a procedure, problem, or test that can be used to compare systems or components to each other or to a standard” \cite{IEEE1990}. A benchmark represents a problem and possible solutions to it, by defining the the motivating comparison, a task sample and evaluation measures \cite{sim2003}.  The task sample can contain programs, tests, and other artifacts dependent on the benchmark’s motivating comparison. A benchmark controls the task sample reducing result variability, increasing repeatability, and providing a basis for comparison \cite{sim2003}.
+
+In this paper we provide a list of recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons and differences. In the rest of this paper, in Section \ref{sec:sec_approaches} we provide the foundation for benchmarking criteria and what are the characteristics of a good SAT and a benchmark.Next we study \textbf{Scanstud: A Methodology for Systematic, Fine-grained Evaluation of Static Analysis Tools} \cite{Scanstud}, then we study \textbf{Delta-Bench: Differential Benchmark for Static Analysis Security Testing Tools} \cite{8170097}. Next we see how MuBenchPipe works which studies \textbf{A Systematic Evaluation of Static API-Misuse Detectors} \cite{8338426}. Then in Section ~\ref{sec:sec_hermes} we see how talk about \textbf{Hermes: Assessment and Creation of Effective Test Corpora} \cite{Reif:2017:HAC:3088515.3088523}. Afterward in Section ~\ref{sec:sec_differential_benchmark}\textbf{FOSS Version Differentiation as a Benchmark for Static Analysis Security Testing Tools} \cite{Pashchenko:2017:FVD:3106237.3121276}.
 
 \section{Foundations}
 \label{sec:sec_approaches}
@@ -93,6 +97,18 @@ In order to compare the upcoming systematic benchmark studies we tried to find a
 	\item \textbf{CH3 - Automatic test execution and result evaluation} The test-code development is not a one-time perfect task. The test cases might not be perfect intially and the test designers will iteratively improve them to fit their needs. Therefore ease the creations and also the benchmark process, the system should be able to automatically and repeatedly run tests and evaluate the results. 
 \end{itemize}
 
+Beside these 3 characteristics, we point to more 7 properties for a successful benchmark, \cite{lu2005bugbench}, \cite{sim2003}:
+
+ \begin{itemize}
+	\item \textbf{Accessibility} A benchmark should be easy to obtain and use. For example the  source under test should be open-source and available online. 
+	\item \textbf{Clarity} A benchmark’s documentation should be clear and concise, in order to adopt easy and extend it.
+	\item \textbf{Relevance/Representative} The selected targets (inputs to SATs) most cover all the issues in the benchmarking subject area  and performance measures must covers all the properties of benchmarking target. 
+	\item \textbf{Solvability} Completing the task sample and obtaining correct metrics should be possible. 
+	\item \textbf{Portability} A benchmark should be usable by different techniques without bias. 
+	\item \textbf{Scalability} It should be scalable to any technique. Adding new techniques and adding other targets should be possible. 
+	\item \textbf{Fairness} A benchmark should not bias towards a specific technique. For example supporting only specific programming language.
+\end{itemize}
+
 \section{Scanstud}
 \label{sec:sec_scanstud}
 The paper propose a micro benchmarking approach for systematic, fine-grained evaluation of Security Static Analysis Tools. They have provide a system in which test could be defined, run automatically and repeatedly and evaluate the results. 
@@ -103,7 +119,7 @@ The host program might produce some false positives. To address this issue they 
 
 In order to automatically creating the tests, they have a list of template issues saved in files, for example opening a socket. Then there is an script that could insert each template in code, and automatically create different version of tests. Moreover, they have created scripts for automatic tool execution, result diffing, and result evaluation. This greatly supports CH3.
 
-Scanstud also provides a way to manually verify the issue. This is normally done by running the host program which is a complete application to run. This also supports CH2.
+Scanstud also provides a way to manually verify the issue. This is normally done by running the host program which is a complete application to run and provides means to interact with the testcode. This way test writer can activate the crafted vulnerability to make sure that the the written code is insecure. For instance for Java test suite, the test application is indeed a full J2EE application, which use the codes in form of servlet, and then the host program provides a web UI which enables the test designer to access the vulnerable code. For sure this supports CH1.
 
 \section{Delta-Bench}
 \label{sec:sec_delta}
@@ -127,12 +143,19 @@ Unfortunately there is not any detail about the automation, reproduction and ext
 \section{MuBenchPipe}
 \label{sec:sec_mubenchpipe}
 
-The paper tries to evaluate different Java API-misuse detectors, static, dynamic and hybrid detectors. and therefore developed a MuBenchPipe \cite{8338426} the first automated pipeline to benchmark API-misuse detectors. They have a data set called MuBench, which contains 90 Java API misuses, 73 investigated from real world projects, and 17 from a conducted survey. They have set up different experiments in order to evaluate different aspects of the tools. 
+The paper tries to evaluate different Java API-misuse detectors, static, dynamic and hybrid detectors. and therefore developed a MuBenchPipe \cite{8338426} the first automated pipeline to benchmark API-misuse detectors. They have a data set called MuBench, which contains 90 Java API misuses, 73 investigated from real world projects, and 17 from a conducted survey. They
+selected 4 tools and they have set up different experiments in order to evaluate different aspects of these tools. Some of these projects accepts source code as input and some accept binary code, therefore for part of constructing their benchmark, they made binary out of the source codes available in MuBench dataset.
 
-MuBenchPipe automates many parts of the experiments -Supports CH3- and provides a command line interface to control them, such as retrieval and compilation of target projects, running detectors, and collecting their findings. There is a review website that reviewers can see all the findings. Some of them are labeled as potential and MuBenchPipe will not compute the experiment statistics unless they receive a review by at least 2 reviewers. 
+MuBenchPipe automates many parts of their experiments:
+\begin{itemize}
+	\item \textbf{checkout}: each item in MuBench as a recorded Id for the respective commit of the project on version control system. It supports SVN and Git repositories, source archives (zip), also hand-crafted examples that come with MuBench.
+	\item \textbf{Compile} For some of the detectors, we need binary as input, therefore MuBenchPipe, is able to build the code by getting all the dependencies and base on the configuration found on MuBench dataset. 
+	\item \textbf{Validation} MuBenchPipe automatically release the result to a review website for manual validation. For every detector finding, the website shows the source code it is found in along with any metadata the detector provides, such as the violated pattern, the properties of the violation, and the detector’s confidence\cite{8338426}.
+\end{itemize}
+
+It provides a command line interface to control every part, such as retrieval and compilation of target projects, running detectors, and collecting their findings. There is a review website that reviewers can see all the findings. Some of them are labeled as potential and MuBenchPipe will not compute the experiment statistics unless they receive a review by at least 2 reviewers. 
 
 With regard to reproduction of experiments, there is a Docker image for both MuBenchPipe and the review website which make it easier to run experiments on different platforms. The review website allows independent reviews, while reviewers working on different workstations, and ensures the integrity using authentication. It is easy to extend MuBenchPipe facilitates the extension in 2 ways. First it has a simple data schema for misuse examples and new plugins (for detection or evaluation) could be added via a clear java interface with Maven. 
-
 
 \section{Hermes}
 \label{sec:sec_hermes}
@@ -150,6 +173,24 @@ Hermes works by searching across the projects looking for the specified feature.
 Hermes Configuration : every selected project has id, classpath and attributes(optional). Queries specified by default are executed. However, their execution can be decided as per the requirements, with possibility to add newer queries. Once queries are executed , Hermes shows if the project contains the feature or not, if the project contains the feature, then the navigation to that particular code portion within the project is enabled. Also these details can be managed enabling easier management of larger collections of projects like Qualitas Corpus. Feature query is a static analysis run on a project which outputs presence of the specified feature or closely related feature. Eg : having only java7 class files. Every feature query has Id of the respective feature and query. Once all the queries are executed, Hermes will select the projects with atleast one occurrence of the feature. If two projects have the same feature occurrence then it will pick the project with lesser number of methods (smaller project). The results can be exported to the external file and post processing can be done.
 
 Blackburn’s DaCapo benchmark suite\cite{Blackburn:2006:DBJ:1167473.1167488} is about developing java performance evaluation using static and dynamic software metrics. And, how to develop the collection for the evaluation. Tempero et al’s Qualitas Corpus is about empirical study of code based on size, content, representativeness and permanence. Livshits et al’s SecuriBench\cite{Livshits_defininga} is about static and dynamic security analysis. All these collections are topic specific and are not updated regularly and that is an issue. Dujmovic presented parameterized approach to generate fully synthetic programs that allow benchmarking and testing. But this approach is not applicable to the real world application. Dujmovic et al’s automatic benchmark management\cite{Dujmovic:2010:AGB:1712605.1712654} can extract and update a collection, but it cannot find the differences between the projects.
+
+\begin{table*}[h]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			& CH1: Testing tool capabilities individually & CH2: Easy, correct,  and iterative testcase creation & CH3: Automatic test execution and result evaluation & CH4: Representativeness \\ \hline
+			Scanstud & Possible & Possible & Possible &  Depends on selected testcases\\ \hline
+			Delta-Bench & Possible & No information & No information &  No information \\ \hline
+			MuBenchPipe & Possible & No information & Possible & Depends on selected testcases \\ \hline
+			Hermes & Possible & No information & Possible & ?  \\ \hline
+			Differential Benchmark & Possible & No information & No information & ?  \\ \hline
+		\end{tabular}%
+	}
+	\caption{Which characteristics each of the approaches has}
+	\label{my-label}
+\end{table*}
 
 Evaluation methodology of Hermes : 
 \begin{enumerate}
@@ -189,34 +230,12 @@ Proposed methodology of differential benchmarking in FOSS:
 	\item Classify the remaining finding
 \end{enumerate}
 
-Here only one bug is fixed at a given time, therefore any other finding not related to the discovered bug is ignored even if it might be right. This is major disadvantage, as it leads to redundant re runs.
+Here only one bug is fixed at a given time, therefore any other finding not related to the discovered bug is ignored even if it might be right. This is major disadvantage, as it leads to redundant reruns.
 
-Synthetic test suite typically contains only flaw within a testcase. Differential benchmarks has sufficient complexity to identify false alerts. Current tools require some additional input data whilst differential benchmark needs fixed and bugged version of projects to generate expected correct code. Differential benchmark is independent of programing languages and bug types. Auto classification of true positive, false negative, false positive, and true negative is also possible. 
-
-\section{Comparison}
-\begin{table}[H]
-	
-	\centering
-	\captionsetup{justification=centering}
-	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			& CH1: Testing tool capabilities individually & CH2: Easy, correct,  and iterative testcase creation & CH3: Automatic test execution and result evaluation & CH4: Representativeness \\ \hline
-			Scanstud & Possible & Possible & Possible \\ \hline
-			Delta-Bench & Possible & No information & No information  \\ \hline
-			MuBenchPipe & Possible & No information & Possible \\ \hline
-			Hermes & Possible & No information & Possible \\ \hline
-			Differential Benchmark & Possible & No information & No information \\ \hline
-			
-		\end{tabular}%
-	}
-	\caption{My caption}
-	\label{my-label}
-\end{table}
-
-
+Synthetic test suite typically contains only flaw within a testcase. Differential benchmarks has sufficient complexity to identify false alerts. Current tools require some additional input data whilst differential benchmark needs fixed and bugged version of projects to generate expected correct code. Differential benchmark is independent of programming languages and bug types. Auto classification of true positive, false negative, false positive, and true negative is also possible. 
 
 \section{Conclusion}
+
 		
 	\bibliographystyle{abbrvnat}
 	\bibliography{references}
