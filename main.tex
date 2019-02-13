@@ -49,11 +49,11 @@
 
 \section{Introduction}
 \label{sec:introduction}
-Static analysis tools (SAT) has been become popular recently. The British Computer Society defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifact builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. 
+Static analysis tools (SAT) has been become popular recently. The British Computer Society defines static analysis of source code as the "analysis of a program carried out without executing the program" \cite{Glossary_of_term}. Thus the input for a static analysis tools is source code or other artifacts wihch builds from source code, like binary. However, there is not a clear list of metrics or definition in order to compare and benchmark these tools. Generally the main issue with static analysis programs is completeness and soundness. A static analysis program is either unable to reliably detect all targeted problems or is prone to false positives, i.e., it reports findings which turn out to be wrong on closer examination \cite{Scanstud}. 
 
-Benchmarks provide an experimental basis for evaluating software engineering theories, represented by software engineering techniques, in an objective and repeatable manner \cite{675631}. Based on IEEE definition benchmark defined as “a procedure, problem, or test that can be used to compare systems or components to each other or to a standard” \cite{IEEE1990}. A benchmark represents a problem and possible solutions to it, by defining the the motivating comparison, a task sample and evaluation measures \cite{sim2003}.  The task sample can contain programs, tests, and other artifacts dependent on the benchmark’s motivating comparison. A benchmark controls the task sample reducing result variability, increasing repeatability, and providing a basis for comparison \cite{sim2003}.
+Benchmarks provide an experimental basis for evaluating software engineering theories, represented by software engineering techniques, in an objective and repeatable manner \cite{675631}. Based on IEEE, benchmark defined as “a procedure, problem, or test that can be used to compare systems or components to each other or to a standard” \cite{IEEE1990}. A benchmark represents a problem and possible solutions to it, by defining the the motivating comparison, a task sample and evaluation measures \cite{sim2003}.  The task sample can contain programs, tests, and other artifacts dependent on the benchmark’s motivating comparison. A benchmark controls the task sample reducing result variability, increasing repeatability, and providing a basis for comparison \cite{sim2003}.
 
-In this paper we provide a list of recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons and differences. In the rest of this paper, in Section \ref{sec:sec_approaches} we provide the foundation for benchmarking criteria and what are the characteristics of a good SAT and a benchmark.Next we study \textbf{Scanstud: A Methodology for Systematic, Fine-grained Evaluation of Static Analysis Tools} \cite{Scanstud}, then we study \textbf{Delta-Bench: Differential Benchmark for Static Analysis Security Testing Tools} \cite{8170097}. Next we see how MuBenchPipe works which studies \textbf{A Systematic Evaluation of Static API-Misuse Detectors} \cite{8338426}. Then in Section ~\ref{sec:sec_hermes} we see how talk about \textbf{Hermes: Assessment and Creation of Effective Test Corpora} \cite{Reif:2017:HAC:3088515.3088523}. Afterward in Section ~\ref{sec:sec_differential_benchmark}\textbf{FOSS Version Differentiation as a Benchmark for Static Analysis Security Testing Tools} \cite{Pashchenko:2017:FVD:3106237.3121276}.
+In this paper we study recent studies on how to systematically create and build benchmarks for static analysis tools and we try to bold commons, differences, shortcomings and advantages. In the rest of this paper, in Section \ref{sec:sec_approaches} we provide the foundation for benchmarking criterion and what are the characteristics of a good SAT and a benchmark. Next, in Section~\ref{sec:sec_scanstud} we study \textbf{Scanstud: A Methodology for Systematic, Fine-grained Evaluation of Static Analysis Tools} \cite{Scanstud}, then we study \textbf{Delta-Bench: Differential Benchmark for Static Analysis Security Testing Tools} \cite{8170097}. Next we see how MuBenchPipe works which proposes \textbf{A Systematic Evaluation of Static API-Misuse Detectors} \cite{8338426}. Then in Section ~\ref{sec:sec_hermes} we talk about \textbf{Hermes: Assessment and Creation of Effective Test Corpora} \cite{Reif:2017:HAC:3088515.3088523}. Afterward in Section ~\ref{sec:sec_differential_benchmark} we look at \textbf{FOSS Version Differentiation as a Benchmark for Static Analysis Security Testing Tools} \cite{Pashchenko:2017:FVD:3106237.3121276} and finally we summerize in Section ~\ref{sec:conclusion}. 
 
 \section{Foundations}
 \label{sec:sec_approaches}
@@ -75,7 +75,6 @@ Before we dive in to approaches, we take look over some criteria that a good SAT
 Chess and West introduced these criteria for Static Analysis Security testing tools, so we can generalize the C3 to \textit{"Issue types coverage"}. Except C4, other criteria should be considered in the design of a benchmark. 
 
 \subsection{Benchmarking approaches}
-
 We mentioned that the input of a SAT is the source code, and correspondingly the benchmarking approaches are categorized based on the input. Johns and Jodeit define 3 different benchmarking approaches \cite{Scanstud}: 
 
 \begin{itemize}
@@ -95,19 +94,26 @@ In order to compare the upcoming systematic benchmark studies we tried to find a
 	\item \textbf{CH1 - Testing tool capabilities individually} a systematic benchmark should be able to test each capability of the tool individually. 
 	\item \textbf{CH2 - Easy, correct, and iterative testcase creation} The system should be able to create easy, correct and iterative testcases. Testcases should be short and human readable and the system should allow the manual verification of a certain issue among defined tests. 
 	\item \textbf{CH3 - Automatic test execution and result evaluation} The test-code development is not a one-time perfect task. The test cases might not be perfect intially and the test designers will iteratively improve them to fit their needs. Therefore ease the creations and also the benchmark process, the system should be able to automatically and repeatedly run tests and evaluate the results. 
-	\item \textbf{CH4 - Representativeness of a tool} This can be defined as how well or accurately can the tool cover the requirement specified and also how accurately can the tool find the requirement within a test corpora. Its is important to note, that lesser representative a tool is, it equally increases the complexity and effort required within an evaluation.
 \end{itemize}
 
-Beside these 3 characteristics, we point to more 7 properties for a successful benchmark, \cite{lu2005bugbench}, \cite{sim2003}:
+Beside these 3 characteristics, we point to more 8 properties for a successful benchmark, the upcoming properties are mostly adopted from paper \textbf{Using Benchmarking to Advance Research: A Challenge to Software Engineering} \cite{sim2003}:
 
  \begin{itemize}
-	\item \textbf{Accessibility} A benchmark should be easy to obtain and use. For example the  source under test should be open-source and available online. 
-	\item \textbf{Clarity} A benchmark’s documentation should be clear and concise, in order to adopt easy and extend it.
-	\item \textbf{Relevance/Representative} The selected targets (inputs to SATs) must cover all the issues in the benchmarking subject area  and performance measures must covers all the properties of benchmarking target. 
+	\item \textbf{Accessibility} A benchmark should be easy to obtain and use. The test materials and results need to be publicly available. Anyone should be able to apply the benchmark to a tool or techniques and compare their results with others. The test and results should be understandable with software engineers at any level of expertise. 
+
+	\item \textbf{Affordability} There should be a trade off between cost and result of benchmark. The cost contains human resource, software and hardware. 
+
+	\item \textbf{Clarity} Benchmark's specification should be clear and concise, in order to adopt easy and extend it.
+	
+	\item \textbf{Relevance/Representativeness} The collection and the goal of tasks in the benchmark must be selected in a way that system might behave in real world sample. This means they should not be meaningful in just the benchmark settings. Also the performance measures must be relevant to comparison being made. This is not an easy property to satisfy and it is very important. 
+	
 	\item \textbf{Solvability} Completing the task sample and obtaining correct metrics should be possible. 
-	\item \textbf{Portability} A benchmark should be usable by different techniques without bias. 
-	\item \textbf{Scalability} It should be scalable to any technique. Adding new techniques and adding other targets should be possible. 
-	\item \textbf{Fairness} A benchmark should not bias towards a specific technique. For example supporting only specific programming language.
+	
+	\item \textbf{Portability} A benchmark should be usable by different techniques without bias. This means it should specified with enough level of abstractions. 
+	
+	\item \textbf{Scalability} It should be scalable to any technique with any level of maturity. Adding new techniques and adding other targets should be possible. 
+	
+	\item \textbf{Fairness} A benchmark should not bias towards a specific technique. For example supporting only specific programming language \cite{lu2005bugbench}.
 \end{itemize}
 
 \section{Scanstud}
@@ -160,7 +166,7 @@ With regard to reproduction of experiments, there is a Docker image for both MuB
 
 \section{Hermes}
 \label{sec:sec_hermes}
-The Hermes\cite{Reif:2017:HAC:3088515.3088523} is a tool, that can analyze collection of java projects and return a optimal set, which covers all requirements, whilst omitting the repetition.This is one of the prime feature of a benechmarking suite,which would satisfy the defined success criteria C1,C2 and C3.Also the characteristics CH1,and CH4 would be addressed.In the Qualitas Corpus\cite{5693210} \cite{Dingsoyr:2013:RCL:2507288.2507322} collection considered, from which Hermes tries to extract the most suitable subset, as per the requirement. However collections like Qualitas Corpus and others can be outdated or built for other purposes, or may have features that are no longer relevant. A subset is composed by taking projects from various collections, across domains which would be developed by various people, thus covering an entirety of the specification as mentioned in characteristic CH4.  Therefore, these projects vary in style, size and methodology. Hence understanding the properties within each of the project that comprises the subset is difficult. Without this understanding it is not possible to establish conclusive results. Hermes helps to overcome these issues with a two step approach, that is:
+The Hermes\cite{Reif:2017:HAC:3088515.3088523} is a tool, that can analyze collection of java projects and return a optimal set, which covers all requirements, whilst omitting the repetition.This is one of the prime feature of a benechmarking suite,which would satisfy the defined success criteria C1,C2 and C3.Also the characteristics CH1,and relevance would be addressed.In the Qualitas Corpus\cite{5693210} \cite{Dingsoyr:2013:RCL:2507288.2507322} collection considered, from which Hermes tries to extract the most suitable subset, as per the requirement. However collections like Qualitas Corpus and others can be outdated or built for other purposes, or may have features that are no longer relevant. A subset is composed by taking projects from various collections, across domains which would be developed by various people, thus covering an entirety of the specification as mentioned in characteristic relevance.  Therefore, these projects vary in style, size and methodology. Hence understanding the properties within each of the project that comprises the subset is difficult. Without this understanding it is not possible to establish conclusive results. Hermes helps to overcome these issues with a two step approach, that is:
 
 \begin{enumerate}
 	\item Help to understand the properties within the projects and 
@@ -179,18 +185,18 @@ Some more tool set which analysed were meeting some of the criteria for a succes
 	\centering
 	\captionsetup{justification=centering}
 	\resizebox{\textwidth}{!}{
-		\begin{tabular}{|c|c|c|c|c|}
+		\begin{tabular}{|c|c|c|c|}
 			\hline
-			& CH1: Testing tool capabilities individually & CH2: Easy, correct,  and iterative testcase creation & CH3: Automatic test execution and result evaluation & CH4: Representativeness \\ \hline
-			Scanstud & Possible & Possible & Possible &  Depends on selected testcases\\ \hline
-			Delta-Bench & Possible & No information & No information &  No information \\ \hline
-			MuBenchPipe & Possible & No information & Possible & Depends on selected testcases \\ \hline
-			Hermes & Possible & Possible & Possible & Possible  \\ \hline
-			Differential Benchmark & Possible & Partially Possible & No information & No information  \\ \hline
+			& CH1: Testing tool capabilities individually & CH2: Easy, correct,  and iterative testcase creation & CH3: Automatic test execution and result evaluation \\ \hline
+			Scanstud & Possible & Possible & Possible \\ \hline
+			Delta-Bench & Possible & No information & No information  \\ \hline
+			MuBenchPipe & Possible & No information & Possible  \\ \hline
+			Hermes & Possible & Possible & Possible  \\ \hline
+			Differential Benchmark & Possible & Partially Possible & No information  \\ \hline
 		\end{tabular}%
 	}
 	\caption{Characteristics available within each approach}
-	\label{my-label}
+\label{tbl1}
 \end{table*}
 
 Evaluation methodology of Hermes : 
@@ -200,7 +206,7 @@ Evaluation methodology of Hermes :
 \end{enumerate}
 
 1) Understanding the test collection:
-Hermes when run on Qualitas Corpus from 2013, it was able to find out, that none of the project used java 8 features. None of the projects used java FX framework Only one project used java 7 feature. Hereby summarizing that collection from September 2013 cannot be used to test for latest java features.Thus we have a clear proof of Hermes satisfying C1,C2, and C3. And characteristics CH1,CH2 AND CH4.
+Hermes when run on Qualitas Corpus from 2013, it was able to find out, that none of the project used java 8 features. None of the projects used java FX framework Only one project used java 7 feature. Hereby summarizing that collection from September 2013 cannot be used to test for latest java features.Thus we have a clear proof of Hermes satisfying C1, C2, and C3 and characteristics CH1, CH2.
 
 2) Generating effective integration testing suite:
 Hermes generated the subset from Qualitas Corpus that is optimal( small, yet effective, means to say it meets the requirement specified) and covering all scenarios mentioned. Whilst creating a optimal subset.Therefore reducing the run time from 16.77 minutes (time required to run on hundred projects that comprises Qualitas Corpus) to 2.82 minutes( time required to run on selected subset). And the code coverage was only 1.09\% less. This could be bettered by adding the missing features in the queries and re-running Hermes. And the size still would remain considerably smaller than original test collection built. Thus Hermes fulfils its purpose of better understanding the test set and automatic creation of subsets using the derived understanding. This fulfils the characteristic CH3.
@@ -231,30 +237,33 @@ Proposed methodology of differential benchmarking in FOSS:
 	\item Classify the remaining finding
 \end{enumerate}
 
-Here only one bug is fixed at a given run, therefore any other finding not related to the discovered bug is ignored even if it might be right. This is major disadvantage, as it leads to redundant reruns. Here characteristic CH4 is not satisfied because the tool is not covering the complete bug spectrum, and we have less information to determine the characteristic CH3. However due to the various re-runs conducted features can be tested individually satisfying the CH1 described above.
+Here only one bug is fixed at a given run, therefore any other finding not related to the discovered bug is ignored even if it might be right. This is major disadvantage, as it leads to redundant reruns. Here characteristic relevance is not satisfied because the tool is not covering the complete bug spectrum, and we have less information to determine the characteristic CH3. However due to the various re-runs conducted features can be tested individually satisfying the CH1 described above.
+
+
 \begin{table*}[h]
-	\centering
-	\captionsetup{justification=centering}
 	\resizebox{\textwidth}{!}{
-		\begin{tabular}{|c|c|c|c|c|c|c|c|}
-			\hline
-			& Accessibility  & Clarity  & Relevance  & Solvability & Portability  & Scalability & Fairness \\ \hline
-			Scanstud & Possible & Possible & Possible &  Depends on selected testcases & xyz & xyz & xyz \\ \hline
-			Delta-Bench & Possible & No information & No information &  No information & xyz & xyz & xyz \\ \hline
-			MuBenchPipe & Possible & No information & Possible & Depends on selected testcases & xyz & xyz & xyz \\ \hline
-			Hermes & Possible & Possible & Possible & Possible & Possible & Possible & Possible  \\ \hline
-			Differential Benchmark & Possible & No information & No information & Possible & Not Possible & Partially possible & Possible  \\ \hline
-		\end{tabular}%
-	}
+\begin{tabular}{|c|p{3cm}|p{2cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+	\hline
+	& Accessibility & Affordability & Clarity & Relevance & Solvability & Portability & Scalability & Fairness \\ \hline
+	Scanstud & Not able to find any repository & Yes & Yes & Not easy to judge & Yes & No, they were not able to adopt all tools & Yes & Yes \\ \hline
+	Delta-Bench & Yes, they use open source applications & Yes & Not enough info about automation and reproduction & Not easy to judge & Yes & No, they just use tools the supports Java & Yes & It just support Java tools and those that pecifically created for finding security vulnerabilities \\ \hline
+	MuBenchPipe & Yes, The MuBench (the dataset) is available online & Yes & Yes & Not easy to judge & Yes & No, for example they can not use DroidAssist because its implementation only supports Dalvik Bytecode & Yes & It just support Java API misses \\ \hline
+	Hermess &  &  &  &  &  &  &  &  \\ \hline
+	Differntial Benchmark &  &  &  &  &  &  &  &  \\ \hline
+\end{tabular}
+}
 	\caption{Characteristics available within each approach}
-	\label{my-label}
+\label{tbl2}
 \end{table*}
 
 Synthetic test suite typically contains only flaw within a testcase. Differential benchmarks has sufficient complexity to identify false alerts. Current tools require some additional input data whilst differential benchmark needs only the fixed and bugged version of projects to generate expected correct code. Differential benchmark is independent of programming languages and bug types. Auto classification of true positive, false negative, false positive, and true negative is also possible. Thus we can say the tool might partially satisfy characteristic CH2, as it cannot be said to be easy due to the re-runs required to arrive at the final conclusion.
 
 \section{Conclusion}
+\label{sec:conclusion}
+To summarize, it can be seen that from Table~\ref{tbl1} in all the approach it is possible to test tools capabilities individually. On the hand, iteratively creating of easy and correct testcases, is only possible in Hermess and Scanstud. With regard to automatic execution of benchmark, all the approaches can do that, except Delta bench and differential-benchmark, which they did not mentioned anything about it. 
 
-		
+Table~\ref{tbl2} illustrates a comparison for the rest of properties we mentioned in Section~\ref{sec:sec_approaches}. The table shows that all approaches are affordable, solveable and scalable. Approaches are not generally portable, this means not all tools in that context could be tested by approaches. They are generally accessible, the sources, tools are available online. With regard to relevance, it was not easy for us to make a decision in many cases, because we were not have enough knowledge about the context they are benchmarking. 
+ 
 	\bibliographystyle{abbrvnat}
 	\bibliography{references}
 	
