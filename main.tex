@@ -103,7 +103,7 @@ Beside these 3 characteristics, we point to 8 more properties for a successful b
 
 	\item \textbf{Clarity} Benchmark's specification should be clear and concise, in order to easily adopt and extend it.
 	
-	\item \textbf{Relevance/Representativeness} The collection and the goal of tasks in the benchmark must be selected in a way that system might behave in real world sample. This means they should not be meaningful in just the benchmark settings. Also the performance measures must be relevant to comparison being made. This is not an easy property to satisfy and also important. Because there is a need to make a decision about the amount of context to include, that makes the problem realistic. 
+	\item \textbf{Relevance/Representativeness} The collection and the goal of tasks in the benchmark must be selected in a way that system might behave in real world sample. This means they should not be meaningful in just the benchmark settings. Also the performance measures must be relevant to comparison being made. This is not an easy property to satisfy, because the testcases should be representive of real source code, and not full of false alarms, where finding such a test case is not easy. 
 	
 	\item \textbf{Solvability} Completing the task sample and obtaining correct metrics should be possible. 
 	
@@ -140,29 +140,32 @@ In order to automatically creating the tests, they have a list of template issue
 
 Scanstud also provides a way to manually verify the issue. This is normally done by running the host program which is a complete application to run and provides means to interact with the testcode. This way test writer can activate the crafted vulnerability to make sure that the written code is insecure. For instance for Java test suite, the test application is indeed a full J2EE application, which use the codes in form of servlet, and then the host program provides a web UI which enables the test designer to access the vulnerable code. This supports CH1.
 
-\section{Delta-Bench}
-\label{sec:sec_delta}
-The aim of this study is to address the limitations of existing Static Analysis Security Testing tool benchmarks such as lack of vulnerability realism, uncertain ground truth, and many false positives\cite{8170097}. Ground truth means a set of known issues in a context that a tool must capture them and false positives happens when a tool incorrectly reports that a static analysis rule is violated. The paper provides a \textit{synthetic benchmark} (Micro benchmarking) in order to mitigate the current problem of other bench-marking approaches, like bug injection and historical vulnerabilities. The first one is not easy to verify \cite{Dahse:2014:SDS:2671225.2671288} and the historical approach only declares a subset of the \textit{ground truth}. On the other hand in a synthetic benchmark atomic tests could be defined which is specifically related to just one vulnerability or a false positive - Supports CH1-. Thus bugs, or false positives could be clearly verified and unlike the historical approach it is easy to extend the system. The paper tries to investigate how synthetic benchmark scales in real software projects. 
+\section{FAULTBENCH}
+\label{sec:sec_FAULTBENCH}
+SATs can identify anomalies in source code early in development process. They produce reports which contain potential program anomalies, which are called \textit{alrets}. For each of the prodcued alerts this is the task of developer to determine whether the alert is a real anomaly or \textit{true positive} (TP). When alert is not important to developer, or it does not indicate an anomaly, it is called \textit{False positive} (FP) \cite{ayewah2007evaluating}. SATs produce a huge  number of alerts in their reports, while unfortunately many of these alerts are FPs. There are two well known techniques in order to address the problem of enourmess number of FPs and they are called \textit{FP mitigation techniques}. \textit{Alert prioritization techniques} are a complementary process that prioritize the produced alerts to users by showing the TPs on top of the list. There is also another complementary techniques called  \textit{alert classification techniques} that are able to classify the produced alerts to FPs and TPs. \textit{FAULTBENCH} \cite{heckman2008establishing} aims to propose a benchmark io order to compare the FP mitigation techniques. 
 
-One of the main problems of using a big software project for bench-marking is the amount of unrelated alamars produced which is not related to benchmarking context, and is known as \textit{Background Noise}. The paper addresses the issue by mixing the historical and synthetic approach. They used big well documented software projects and extracted the ground truth from their source code repository. The ground truth is what they expect a tool could find.
+The paper claims that there are several benchmarks available for anomaly detection techniques, but these benchmarks are not fulfill all the needs. First of all, they are mostly accept tools for C/C++ programming languages and also they do not provide an easy way to repeat and automate process. Furthermore in the process of alert priotrization, there is a part that researcher should remove the anomalies, which is very costly in large projects, becuase there are many number of FPs produces. Therefore they want to build an automated repeatable benchmark of small, real Java programs on different domains. 
 
-In order to find the vulnerable source code they extract 2 revisions of the code, C\textsubscript{vuln} and C\textsubscript{fixed}. C\textsubscript{vuln} is the revision prior to C\textsubscript{fixed} which has the targeted vulnerability and C\textsubscript{fixed} is the fixed version. In the ideal case the tool output for C\textsubscript{vuln} only contains the the related alerts. However the tool might produce some false positive alarms which is not related to the type of targeted vulnerability. The paper says that, the change in code from vuln to fixed version is just related to the targeted vulnerability, hence C\textsubscript{fixed} should not contains alarms related to fixed vulnerabilities, but still has the false alarms. Thus if we subtract the outputs we reach the set of true alarms. 
+\subsection{FAULTBENCH creation } 
 
-The main 5 steps of approach: 
-\begin{enumerate}
-	\item Find a proper project with enough documentation to find the fixed and vulnerable revisions. 
-	\item For each vulnerability find  C\textsubscript{vuln},  C\textsubscript{fixed} pairs
-	\item Use \textit{diff} tool to find the modified code
-	\item Run the tool on both C\textsubscript{vuln} and C\textsubscript{fixed} versions.
-	\item Signals are the alerts differing between the tool outputs on C\textsubscript{vuln} and C\textsubscript{fixed}. To find the \textit{background noise} they use the line number of reported alarms. 
-\end{enumerate}
+\textbf{ FAULTBENCH Process} section 3.1
 
-Unfortunately there is not any detail about the automation, reproduction and extension of the process. The best advantage of the approach is that it could remove the background noise, but it still has some limitations. First of all, the bug fix commit should only contains the codes reltaed to the fix, and if there be any other unrelated codes like refactoring, could lead to some differences in the alarms. The second limitation is the initial phase where a set of vulnerable, fixed bugs must be found in a real world project, thus it could be just applied to project with well documented source issues and fixes.
+\textbf{ FAULTBENCH definition} section 3.2
+
+\textbf{Subject selection} section 3.4
+
+\textbf{3.5 FAULTBENCHSubjectInitialization} vivin
+
+\textbf{3.6 BenchmarkLimitations} vivin
+
+
+
+ For the alert oracles they used alerts produced by FINDBUGS \cite{hovemeyer2004finding}.
 
 \section{MuBenchPipe}
 \label{sec:sec_mubenchpipe}
 
-The paper tries to evaluate different Java API-misuse detectors, static, dynamic and hybrid detectors. and therefore developed a MuBenchPipe \cite{8338426} the first automated pipeline to benchmark API-misuse detectors. They have a data set called MuBench, which contains 90 Java API misuses, 73 investigated from real world projects, and 17 from a conducted survey. They have selected 4 tools and they set up different experiments in order to evaluate many aspects of these tools. Some of these projects accept source code as input and others accept binary code, therefore for part of constructing their benchmark, they made binary out of the source codes available in MuBench dataset.
+The paper tries to evaluate different Java API-misuse detectors, static, dynamic and hybrid detectors. and therefore developed a MuBenchPipe \cite{8338426} the first automated pipeline to benchmark API-misuse detectors. They have a data set called MuBench, which contains 90 Java API misuses, 73 investigated from real world projects, and 17 from a conducted survey. They have selected 4 tools and they set up different experiments in order to evaluate many aspects of these tools. Some of these projects accept source code as input and others accept binary code, therefore for part of constructing their benchmark, they made binary out of the source codes available in MuBench dataset. 
 
 MuBenchPipe automates many parts of their experiments:
 \begin{itemize}
