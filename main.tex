@@ -142,17 +142,28 @@ Scanstud also provides a way to manually verify the issue. This is normally done
 
 \section{FAULTBENCH}
 \label{sec:sec_FAULTBENCH}
-SATs can identify anomalies in source code early in development process. They produce reports which contain potential program anomalies, which are called \textit{alrets}. For each of the prodcued alerts this is the task of developer to determine whether the alert is a real anomaly or \textit{true positive} (TP). When alert is not important to developer, or it does not indicate an anomaly, it is called \textit{False positive} (FP) \cite{ayewah2007evaluating}. SATs produce a huge  number of alerts in their reports, while unfortunately many of these alerts are FPs. There are two well known techniques in order to address the problem of enourmess number of FPs and they are called \textit{FP mitigation techniques}. \textit{Alert prioritization techniques} are a complementary process that prioritize the produced alerts to users by showing the TPs on top of the list. There is also another complementary techniques called  \textit{alert classification techniques} that are able to classify the produced alerts to FPs and TPs. \textit{FAULTBENCH} \cite{heckman2008establishing} aims to propose a benchmark io order to compare the FP mitigation techniques. 
+SATs can identify anomalies in source code early in development process. They produce reports which contain potential program anomalies, which are called \textit{alrets}. For each of the prodcued alerts this is the task of developer to determine whether the alert is a real anomaly or \textit{true positive} (TP). When alert is not important to developer, or it does not indicate an anomaly, it is called \textit{False positive} (FP) \cite{ayewah2007evaluating}. SATs produce a huge  number of alerts in their reports, while unfortunately many of these alerts are FPs. There are two well known techniques in order to address the problem of enormousness number of FPs and they are called \textit{FP mitigation techniques}. \textit{Alert prioritization techniques} are a complementary process that prioritize the produced alerts to users by showing the TPs on top of the list. There is also another complementary techniques called  \textit{alert classification techniques} that are able to classify the produced alerts to FPs and TPs. \textit{FAULTBENCH} \cite{heckman2008establishing} aims to propose a benchmark io order to compare the FP mitigation techniques. 
 
 The paper claims that there are several benchmarks available for anomaly detection techniques, but these benchmarks are not fulfill all the needs. First of all, they are mostly accept tools for C/C++ programming languages and also they do not provide an easy way to repeat and automate process. Furthermore in the process of alert priotrization, there is a part that researcher should remove the anomalies, which is very costly in large projects, becuase there are many number of FPs produces. Therefore they want to build an automated repeatable benchmark of small, real Java programs on different domains. 
 
 \subsection{FAULTBENCH creation } 
+ FAULTBENCH evaluates the \textit{Adaptive False Positive Mitigation} (AFPM) techniques. AFPM techniques is those that after classification or prioritization tries to fix the alerts. After each phase of inspection in AFPM an alert would be in one of these satates: FP, TP or uninspected. Here is the FAULTBENCH flow:
 
-\textbf{ FAULTBENCH Process} section 3.1
+\begin{enumerate}
+	\item Run SAT on a clean version of the subject program.
+	\item Keep record of alerts state.
+	\item Apply the FP mitigation technique. 
+	\item Select the most important alert (based on applied technique) and inspect the alert using alert oracles:
+	\begin{enumerate}
+		\item If it is an anomaly, fix the alert with declared change and rerun the tool.
+		\item If it is FP, suppress the alert. 
+	\end{enumerate}
+	\item After each alert inspection, record the state of alerts.
+	\item When all the inspections are done, evaluate the result.
+\end{enumerate}
+in all the steps above, automatically run the tools when it is possible. 
 
-\textbf{ FAULTBENCH definition} section 3.2
-
-\textbf{Subject selection} section 3.4
+With regard to subjects, they have selected open source Java programs compatible with Java 1.4.2 or 1.5 is diverse domains. They have selected the subjects based on six characteristics: domain, number of developers, LOC (size of the subject), number og FINDBUGS alerts, maturity and alert distribution. For each of subjects they found the values, and if the characteristic is categorical, like domain, they assign a numerical value to it. Then they used polar charts \cite{boehm2003balancing} to select the final set of subject projects. 
 
 \textbf{3.5 FAULTBENCHSubjectInitialization} vivin
 
@@ -273,6 +284,9 @@ Synthetic test suite typically contains only flaw within a testcase. Differentia
 
 \section{Conclusion}
 \label{sec:conclusion}
+
+\textbf{for faultbench section 3.3 Desideratafor Benchmarks}
+
 To summarize, it can be seen from Table~\ref{tbl1} that in all the approaches it is possible to test tools capabilities individually. On the other hand, iteratively creating easy and correct testcase, is only possible in Hermes and Scanstud. With regard to automatic execution of benchmark, all the approaches can do that, except Delta bench and differential-benchmark.
 
 Table~\ref{tbl2} compares the rest of properties we mentioned in Section~\ref{sec:sec_approaches}. The table shows that all approaches are affordable, solvable and scalable. Approaches are not generally portable, this means not all tools in that context could be tested by approaches. They are generally accessible, the sources, tools are available online.  
