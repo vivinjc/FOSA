@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.3)  4 MAR 2019 14:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.3)  4 MAR 2019 15:41
 entering extended mode
 **./main.tex
 (main.tex
@@ -751,14 +751,14 @@ Non-PDF special ignored!
 <special> papersize=a4
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 67.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 68.
  ("D:\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 67.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 68.
 
-Underfull \hbox (badness 1019) in paragraph at lines 83--84
+Underfull \hbox (badness 1019) in paragraph at lines 84--85
 []\OT1/ptm/b/n/11 Micro bench-mark-ing suites \OT1/ptm/m/n/11 con-tains test su
 its
  []
@@ -770,17 +770,17 @@ File: lstlang1.sty 2018/09/02 1.7 listings language file
 File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 131.
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 131.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 132.
 
 
 ("D:\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omlptm.fd"
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <7> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 131.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 132.
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 131.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
  [3] [4] [5]
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 226.
 
@@ -808,137 +808,112 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 Underfull \vbox (badness 6396) has occurred while \output is active []
 
 
-Overfull \hbox (0.8658pt too wide) in paragraph at lines 255--255
+Overfull \hbox (0.8658pt too wide) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 Affordability| 
  []
 
 
-Underfull \hbox (badness 2653) in paragraph at lines 255--255
+Underfull \hbox (badness 2653) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 able to adopt all
  []
 
 
-Underfull \hbox (badness 6461) in paragraph at lines 255--255
-[]\OT1/ptm/m/n/11 Not enough info
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
-\OT1/ptm/m/n/11 about au-toma-tion
- []
-
-
-Underfull \hbox (badness 1275) in paragraph at lines 255--255
-[]\OT1/ptm/m/n/11 No, they just use
- []
-
-
-Underfull \hbox (badness 1286) in paragraph at lines 255--255
-\OT1/ptm/m/n/11 tools the sup-ports
- []
-
-
-Underfull \hbox (badness 2818) in paragraph at lines 255--255
-\OT1/ptm/m/n/11 pecif-i-cally cre-ated
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 (the dataset) is
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 No, for ex-am-
  []
 
 
-Underfull \hbox (badness 3098) in paragraph at lines 255--255
+Underfull \hbox (badness 3098) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 ple they can not
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 use DroidAs-sist
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 be-cause its im-
  []
 
 
-Underfull \hbox (badness 3919) in paragraph at lines 255--255
+Underfull \hbox (badness 3919) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 ple-men-ta-tion only
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 sup-ports Dalvik
  []
 
 
-Underfull \hbox (badness 3482) in paragraph at lines 255--255
+Underfull \hbox (badness 3482) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 No, suf-fi-cient in-
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 255--255
+Underfull \hbox (badness 1558) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 avail-abil-ity of the
  []
 
 
-Underfull \hbox (badness 2134) in paragraph at lines 255--255
+Underfull \hbox (badness 2134) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 Yes, it is a well
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 255--255
+Underfull \hbox (badness 1237) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 Yes, it solves the
  []
 
 
-Underfull \hbox (badness 3482) in paragraph at lines 255--255
+Underfull \hbox (badness 3482) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 No, suf-fi-cient in-
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 255--255
+Underfull \hbox (badness 1558) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 avail-abil-ity of the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 Yes, as it tries
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 to ad-dress most
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 vul-ner-a-bil-i-ties
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 255--255
+Underfull \hbox (badness 2351) in paragraph at lines 254--254
 []\OT1/ptm/m/n/11 Yes, as it is not
  []
 
 
-Underfull \hbox (badness 3942) in paragraph at lines 255--255
+Underfull \hbox (badness 3942) in paragraph at lines 254--254
 \OT1/ptm/m/n/11 u-lar pro-gram-ming
  []
 
 
-Overfull \hbox (1.9104pt too wide) in paragraph at lines 262--263
+Overfull \hbox (1.9104pt too wide) in paragraph at lines 261--262
 \OT1/ptm/m/n/11 2016) (Kup-sch and Miller 2009) (Wi-lan-der and Kamkar
  []
 
 
-Underfull \hbox (badness 1122) in paragraph at lines 266--267
+Underfull \hbox (badness 1122) in paragraph at lines 265--266
 \OT1/ptm/m/n/11 2017) dif-fer-en-tial vul-ner-a-bil-ity fix-ing method-ol-ogy
  []
 
@@ -946,15 +921,11 @@ Underfull \hbox (badness 1122) in paragraph at lines 266--267
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
-Underfull \hbox (badness 1168) in paragraph at lines 293--296
+Underfull \hbox (badness 1168) in paragraph at lines 292--295
 \OT1/ptm/b/n/11 for fault-bench sec-tion 3.3 Desider-atafor Bench-
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [7]
-(main.bbl
+[7] (main.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 12--14
 []\OT1/ptm/m/n/10 Owasp we-b-goat project.  URL
  []
@@ -1060,32 +1031,53 @@ Overfull \hbox (8.74796pt too wide) in paragraph at lines 106--112
  []
 
 
+Underfull \hbox (badness 4403) in paragraph at lines 115--124
+[]\OT1/ptm/m/n/10 S. Heck-man and L. Williams.  On es-tab-lish-ing a
+ []
+
+
+Underfull \hbox (badness 1910) in paragraph at lines 115--124
+\OT1/ptm/m/n/10 bench-mark for eval-u-at-ing static anal-y-sis alert pri-or-
+ []
+
+
+Underfull \hbox (badness 1584) in paragraph at lines 115--124
+\OT1/ptm/m/n/10 i-ti-za-tion and clas-si-fi-ca-tion tech-niques.  In \OT1/ptm/m
+/it/10 Pro-ceed-
+ []
+
+
+Underfull \hbox (badness 1248) in paragraph at lines 115--124
+\OT1/ptm/m/it/10 ings of the Sec-ond ACM-IEEE In-ter-na-tional Sym-po-
+ []
+
+
 Underfull \vbox (badness 1895) has occurred while \output is active []
 
  [8]
-Underfull \hbox (badness 7047) in paragraph at lines 171--180
+Underfull \hbox (badness 7047) in paragraph at lines 179--188
 []\OT1/ptm/m/n/10 I. Pashchenko.  Foss ver-sion dif-fer-en-ti-a-tion as a
  []
 
 
-Underfull \hbox (badness 2221) in paragraph at lines 171--180
+Underfull \hbox (badness 2221) in paragraph at lines 179--188
 \OT1/ptm/m/n/10 bench-mark for static anal-y-sis se-cu-rity test-ing tools.
  []
 
 
-Underfull \hbox (badness 7504) in paragraph at lines 171--180
+Underfull \hbox (badness 7504) in paragraph at lines 179--188
 \OT1/ptm/m/n/10 In \OT1/ptm/m/it/10 Pro-ceed-ings of the 2017 11th Joint Meet-i
 ng
  []
 
 
-Underfull \hbox (badness 1527) in paragraph at lines 171--180
+Underfull \hbox (badness 1527) in paragraph at lines 179--188
 \OT1/ptm/m/it/10 on Foun-da-tions of Soft-ware En-gi-neer-ing\OT1/ptm/m/n/10 , 
 ES-EC/FSE
  []
 
 
-Underfull \hbox (badness 7047) in paragraph at lines 171--180
+Underfull \hbox (badness 7047) in paragraph at lines 179--188
 \OT1/ptm/m/n/10 ACM.  ISBN 978-1-4503-5105-8.  .  URL
  []
 
@@ -1103,10 +1095,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 17894 strings out of 492946
- 327093 string characters out of 3135049
- 597298 words of memory out of 3000000
- 21436 multiletter control sequences out of 15000+200000
+ 17891 strings out of 492946
+ 327084 string characters out of 3135049
+ 594233 words of memory out of 3000000
+ 21433 multiletter control sequences out of 15000+200000
  29433 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,51p,1843b,1463s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1118,7 +1110,7 @@ s/type1/public/amsfonts/cm/cmsy10.pfb><D:/Local/Programs/MiKTeX 2.9/fonts/type1
 amsfonts/cm/cmtt10.pfb><D:/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb
 8a.pfb><D:/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><D:/Local
 /Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (9 pages, 145409 bytes).
+Output written on main.pdf (9 pages, 145608 bytes).
 PDF statistics:
  68 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

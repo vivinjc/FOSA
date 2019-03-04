@@ -1,4 +1,4 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -110,17 +110,25 @@ T.~Greiman.
 \newblock ISBN 9781910810828.
 \newblock URL \url{https://books.google.de/books?id=XD7QCwAAQBAJ}.
 
-\bibitem[Heckman and Williams(2008)]{heckman2008establishing}
+\bibitem[Heckman and
+  Williams(2008{\natexlab{a}})]{Heckman:2008:EBE:1414004.1414013}
+S.~Heckman and L.~Williams.
+\newblock On establishing a benchmark for evaluating static analysis alert
+  prioritization and classification techniques.
+\newblock In \emph{Proceedings of the Second ACM-IEEE International Symposium
+  on Empirical Software Engineering and Measurement}, ESEM '08, pages 41--50,
+  New York, NY, USA, 2008{\natexlab{a}}. ACM.
+\newblock ISBN 978-1-59593-971-5.
+\newblock \doi{10.1145/1414004.1414013}.
+\newblock URL \url{http://doi.acm.org/10.1145/1414004.1414013}.
+
+\bibitem[Heckman and Williams(2008{\natexlab{b}})]{heckman2008establishing}
 S.~Heckman and L.~Williams.
 \newblock On establishing a benchmark for evaluating static analysis alert
   prioritization and classification techniques.
 \newblock In \emph{Proceedings of the Second ACM-IEEE international symposium
-  on Empirical software engineering and measurement}, pages 41--50. ACM, 2008.
-
-\bibitem[Hovemeyer and Pugh(2004)]{hovemeyer2004finding}
-D.~Hovemeyer and W.~Pugh.
-\newblock Finding bugs is easy.
-\newblock \emph{Acm sigplan notices}, 39\penalty0 (12):\penalty0 92--106, 2004.
+  on Empirical software engineering and measurement}, pages 41--50. ACM,
+  2008{\natexlab{b}}.
 
 \bibitem[IEEE(1990)]{IEEE1990}
 IEEE.
@@ -177,14 +185,6 @@ I.~Pashchenko.
 \newblock ISBN 978-1-4503-5105-8.
 \newblock \doi{10.1145/3106237.3121276}.
 \newblock URL \url{http://doi.acm.org/10.1145/3106237.3121276}.
-
-\bibitem[Pashchenko et~al.(2017)Pashchenko, Dashevskyi, and Massacci]{8170097}
-I.~Pashchenko, S.~Dashevskyi, and F.~Massacci.
-\newblock Delta-bench: Differential benchmark for static analysis security
-  testing tools.
-\newblock In \emph{2017 ACM/IEEE International Symposium on Empirical Software
-  Engineering and Measurement (ESEM)}, pages 163--168, Nov 2017.
-\newblock \doi{10.1109/ESEM.2017.24}.
 
 \bibitem[Reif et~al.(2017)Reif, Eichberg, Hermann, and
   Mezini]{Reif:2017:HAC:3088515.3088523}
