@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.3)  4 MAR 2019 17:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.3)  4 MAR 2019 20:08
 entering extended mode
 **./main.tex
 (main.tex
@@ -1087,11 +1087,7 @@ Underfull \hbox (badness 1748) in paragraph at lines 191--199
 \OT1/ptm/m/n/10 mes: As-sess-ment and cre-ation of ef-fec-tive test cor-
  []
 
-
-Underfull \vbox (badness 4120) has occurred while \output is active []
-
- [8])
-[9
+[8]) [9
 
 ] (main.aux)
 
@@ -1115,7 +1111,7 @@ s/type1/public/amsfonts/cm/cmsy10.pfb><D:/Local/Programs/MiKTeX 2.9/fonts/type1
 amsfonts/cm/cmtt10.pfb><D:/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb
 8a.pfb><D:/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><D:/Local
 /Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (9 pages, 145026 bytes).
+Output written on main.pdf (9 pages, 144830 bytes).
 PDF statistics:
  68 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
